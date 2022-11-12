@@ -1,0 +1,139 @@
+// ported using https://codemirror.net/5/theme/gruvbox-dark.css
+
+@mixin variables {
+  --bg0        : rgb(var(--ctp-base));
+  --bg1        : rgb(var(--ctp-overlay1));
+  --bg4        : rgb(var(--ctp-overlay0));
+  --fg         : rgb(var(--ctp-text));
+  --fg3        : rgb(var(--ctp-subtext0));
+  --gray       : rgb(var(--ctp-subtext1));
+  --blue       : rgb(var(--ctp-blue));
+  --yellow     : rgb(var(--ctp-yellow));
+  --aqua       : rgb(var(--ctp-blue));
+  --orange     : rgb(var(--ctp-peach));
+
+  --current-line : rgb(var(--ctp-surface0));
+  --selection    : rgb(var(--ctp-surface2));
+  --atom         : rgb(var(--ctp-lavender));
+  --cursor       : rgb(var(--ctp-overlay1));
+  --keyword      : rgb(var(--ctp-red));
+  --operator     : rgb(var(--ctp-sky));
+  --number       : rgb(var(--ctp-peach));
+  --definition   : rgb(var(--ctp-blue));
+  --string       : rgb(var(--ctp-green));
+}
+
+@mixin theme {
+
+    &.CodeMirror,
+    .CodeMirror-gutters {
+        background-color: var(--bg0);
+        color: var(--fg3);
+    }
+
+    .CodeMirror-gutters {
+        background: var(--bg0);
+        border-right: 0px;
+    }
+
+    .CodeMirror-linenumber {
+        color: var(--bg4)
+    }
+
+    .CodeMirror-cursor {
+        border-left: 1px solid var(--fg);
+    }
+
+    &.cm-fat-cursor .CodeMirror-cursor {
+        background-color: var(--cursor) !important;
+    }
+
+    .cm-animate-fat-cursor {
+        background-color: var(--cursor) !important;
+    }
+
+    div.CodeMirror-selected {
+        background: var(--selection);
+    }
+
+    span.cm-meta {
+        color: var(--blue);
+    }
+
+    span.cm-comment {
+        color: var(--gray);
+    }
+
+    span.cm-number {
+        color: var(--number);
+    }
+    span.cm-atom {
+        color: var(--atom)
+    }
+
+    span.cm-keyword {
+        color: var(--keyword);
+    }
+
+    span.cm-variable {
+        color: var(--fg);
+    }
+
+    span.cm-variable-2 {
+        color: var(--fg);
+    }
+
+    span.cm-variable-3,
+    .cm-s-gruvbox-dark span.cm-type {
+        color: var(--yellow);
+    }
+
+    span.cm-operator {
+        color: var(--operator);
+    }
+
+    span.cm-callee {
+        color: var(--fg);
+    }
+
+    span.cm-def {
+        color: var(--definition);
+    }
+
+    span.cm-property {
+        color: var(--fg);
+    }
+
+    span.cm-string {
+        color: var(--string);
+    }
+
+    span.cm-string-2 {
+        color: var(--aqua);
+    }
+
+    span.cm-qualifier {
+        color: var(--aqua);
+    }
+
+    span.cm-attribute {
+        color: var(--aqua);
+    }
+
+    .CodeMirror-activeline-background {
+        background: var(--current-line);
+    }
+
+    .CodeMirror-matchingbracket {
+        background: var(--gray);
+        color: var(--bg0) !important;
+    }
+
+    span.cm-builtin {
+        color: var(--orange);
+    }
+
+    span.cm-tag {
+        color: var(--orange);
+    }
+}
