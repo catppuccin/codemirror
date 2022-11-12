@@ -12,39 +12,53 @@
 </p>
 
 <p align="center">
-	<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/previews/preview.webp"/>
+	<img src="assets/preview.webp"/>
 </p>
 
 ## Previews
 
 <details>
 <summary>🌻 Latte</summary>
-<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/previews/latte.webp"/>
+<img src="assets/latte-prev.webp"/>
 </details>
 <details>
 <summary>🪴 Frappé</summary>
-<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/previews/frappe.webp"/>
+<img src="assets/frappe-prev.webp"/>
 </details>
 <details>
 <summary>🌺 Macchiato</summary>
-<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/previews/macchiato.webp"/>
+<img src="assets/macchiato-prev.webp"/>
 </details>
 <details>
 <summary>🌿 Mocha</summary>
-<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/previews/mocha.webp"/>
+<img src="assets/mocha-prev.webp"/>
 </details>
 
 ## Usage
 
-1. Copy
-2. Open the app's settings
-3. Select `import theme` and browse to where you cloned Catppuccin
-4. Select it
+From the [official CodeMirror docs](https://codemirror.net/5/doc/manual.html#:~:text=that%20same%20separator.-,theme,-%3A%20string),
 
-## 🙋 FAQ (optional)
+> You must make sure the desired CSS file defining the corresponding .cm-s-[name] styles is loaded (see the theme directory in the distribution).
 
--	Q: **_"Where can I find the doc?"_**\
-	A: Run `:help theme`
+1. Make sure to add desired css file to your project by copying it from this repository
+2. Set CodeMirror editor instance's `theme` option to the name corresponding to your theme from following table. 
+```js
+  const editor = CodeMirror.fromTextArea(document.getElementById("code"));
+  editor.setOption("theme", "ctp-mocha"); // set theme to Catppuccin Mocha
+```
+Check out the (demo)[demo] for reference.
+
+| Palette   |     Name      |
+|-----------|---------------|
+| Latte     | ctp-latte     |
+| Frappé    | ctp-frappe    |
+| Macchiato | ctp-macchiato |
+| Mocha     | ctp-mocha     |
+
+## 🙋 FAQ
+
+-	Q: **_Will this work with latest version of CodeMirror (v6)?_**\
+	A: No. It will need additional work to port v6.
 
 ## 💝 Thanks to
 
