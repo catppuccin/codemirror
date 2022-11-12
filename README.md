@@ -46,7 +46,7 @@ From the [official CodeMirror docs](https://codemirror.net/5/doc/manual.html#:~:
   const editor = CodeMirror.fromTextArea(document.getElementById("code"));
   editor.setOption("theme", "ctp-mocha"); // set theme to Catppuccin Mocha
 ```
-Check out the (demo)[demo] for reference.
+Check out the [demo](demo) for reference.
 
 | Palette   |     Name      |
 |-----------|---------------|
