@@ -1,0 +1,134 @@
+div.cm-s-ctp-mocha.CodeMirror {
+  --ctp-rosewater: 245, 224, 220;
+  --ctp-flamingo: 242, 205, 205;
+  --ctp-pink: 245, 194, 231;
+  --ctp-mauve: 203, 166, 247;
+  --ctp-red: 243, 139, 168;
+  --ctp-maroon: 235, 160, 172;
+  --ctp-peach: 250, 179, 135;
+  --ctp-yellow: 249, 226, 175;
+  --ctp-green: 166, 227, 161;
+  --ctp-teal: 148, 226, 213;
+  --ctp-sky: 137, 220, 235;
+  --ctp-sapphire: 116, 199, 236;
+  --ctp-blue: 135, 176, 249;
+  --ctp-lavender: 180, 190, 254;
+  --ctp-text: 198, 208, 245;
+  --ctp-subtext1: 179, 188, 223;
+  --ctp-subtext0: 161, 168, 201;
+  --ctp-overlay2: 142, 149, 179;
+  --ctp-overlay1: 123, 129, 157;
+  --ctp-overlay0: 105, 109, 134;
+  --ctp-surface2: 86, 89, 112;
+  --ctp-surface1: 67, 70, 90;
+  --ctp-surface0: 49, 50, 68;
+  --ctp-base: 30, 30, 46;
+  --ctp-mantle: 24, 24, 37;
+  --ctp-crust: 17, 17, 27;
+  --bg0: rgb(var(--ctp-base));
+  --bg1: rgb(var(--ctp-overlay1));
+  --bg4: rgb(var(--ctp-overlay0));
+  --fg: rgb(var(--ctp-text));
+  --fg3: rgb(var(--ctp-subtext0));
+  --gray: rgb(var(--ctp-subtext1));
+  --blue: rgb(var(--ctp-blue));
+  --yellow: rgb(var(--ctp-yellow));
+  --aqua: rgb(var(--ctp-blue));
+  --orange: rgb(var(--ctp-peach));
+  --current-line: rgb(var(--ctp-surface0));
+  --selection: rgb(var(--ctp-surface2));
+  --atom: rgb(var(--ctp-lavender));
+  --cursor: rgb(var(--ctp-overlay1));
+  --keyword: rgb(var(--ctp-red));
+  --operator: rgb(var(--ctp-sky));
+  --number: rgb(var(--ctp-peach));
+  --definition: rgb(var(--ctp-blue));
+  --string: rgb(var(--ctp-green));
+}
+
+.cm-s-ctp-mocha.CodeMirror,
+.cm-s-ctp-mocha .CodeMirror-gutters {
+  background-color: var(--bg0);
+  color: var(--fg3);
+}
+.cm-s-ctp-mocha .CodeMirror-gutters {
+  background: var(--bg0);
+  border-right: 0px;
+}
+.cm-s-ctp-mocha .CodeMirror-linenumber {
+  color: var(--bg4);
+}
+.cm-s-ctp-mocha .CodeMirror-cursor {
+  border-left: 1px solid var(--fg);
+}
+.cm-s-ctp-mocha.cm-fat-cursor .CodeMirror-cursor {
+  background-color: var(--cursor) !important;
+}
+.cm-s-ctp-mocha .cm-animate-fat-cursor {
+  background-color: var(--cursor) !important;
+}
+.cm-s-ctp-mocha div.CodeMirror-selected {
+  background: var(--selection);
+}
+.cm-s-ctp-mocha span.cm-meta {
+  color: var(--blue);
+}
+.cm-s-ctp-mocha span.cm-comment {
+  color: var(--gray);
+}
+.cm-s-ctp-mocha span.cm-number {
+  color: var(--number);
+}
+.cm-s-ctp-mocha span.cm-atom {
+  color: var(--atom);
+}
+.cm-s-ctp-mocha span.cm-keyword {
+  color: var(--keyword);
+}
+.cm-s-ctp-mocha span.cm-variable {
+  color: var(--fg);
+}
+.cm-s-ctp-mocha span.cm-variable-2 {
+  color: var(--fg);
+}
+.cm-s-ctp-mocha span.cm-variable-3,
+.cm-s-ctp-mocha .cm-s-gruvbox-dark span.cm-type {
+  color: var(--yellow);
+}
+.cm-s-ctp-mocha span.cm-operator {
+  color: var(--operator);
+}
+.cm-s-ctp-mocha span.cm-callee {
+  color: var(--fg);
+}
+.cm-s-ctp-mocha span.cm-def {
+  color: var(--definition);
+}
+.cm-s-ctp-mocha span.cm-property {
+  color: var(--fg);
+}
+.cm-s-ctp-mocha span.cm-string {
+  color: var(--string);
+}
+.cm-s-ctp-mocha span.cm-string-2 {
+  color: var(--aqua);
+}
+.cm-s-ctp-mocha span.cm-qualifier {
+  color: var(--aqua);
+}
+.cm-s-ctp-mocha span.cm-attribute {
+  color: var(--aqua);
+}
+.cm-s-ctp-mocha .CodeMirror-activeline-background {
+  background: var(--current-line);
+}
+.cm-s-ctp-mocha .CodeMirror-matchingbracket {
+  background: var(--gray);
+  color: var(--bg0) !important;
+}
+.cm-s-ctp-mocha span.cm-builtin {
+  color: var(--orange);
+}
+.cm-s-ctp-mocha span.cm-tag {
+  color: var(--orange);
+}

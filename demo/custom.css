@@ -1,0 +1,57 @@
+:root {
+  --ctp-mocha     : #1e1e2e;
+  --ctp-latte     : #eff1f5;
+  --ctp-macchiato : #24273a;
+  --ctp-frappe    : #303446;
+  --bg            : unset;
+}
+
+article {
+  top       : 50vh;
+  left      : 50vw;
+  position  : absolute;
+  transform : translatex(-50%) translatey(-50%);
+  width     : 1000px;
+
+}
+
+.CodeMirror {
+  font-size: 20px
+}
+
+/* titlebar */
+.outer {
+  background    : #b4b4b4;
+  padding       : 5px 10px;
+  border-radius : 7px 7px 0px 0px;
+  margin-bottom : -1px;
+}
+
+.outer.osx {
+  background : var(--bg);
+}
+
+.dot {
+  display       : inline-block;
+  width         : 10px;
+  height        : 10px;
+  background    : #f9f9f9;
+  border-radius : 50%;
+  margin        : 0 4px 0 0;
+}
+
+.dot.red {
+  background : #FF6057;
+  border     : 1px solid #E14640;
+}
+
+.dot.amber {
+  background : #FFBD2E;
+  border     : 1px solid #DFA123;
+}
+
+.dot.green {
+  background : #27C93F;
+  border     : 1px solid #1DAD2B;
+}
+
