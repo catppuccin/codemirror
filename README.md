@@ -41,7 +41,7 @@ From the [official CodeMirror docs](https://codemirror.net/5/doc/manual.html#:~:
 > You must make sure the desired CSS file defining the corresponding .cm-s-[name] styles is loaded (see the theme directory in the distribution).
 
 1. Make sure to add desired css file to your project by copying it from this repository
-2. Set CodeMirror editor instance's `theme` option to the name corresponding to your theme from following table. 
+2. Set CodeMirror editor instance's `theme` option to the name corresponding to your palette choice from following table. 
 ```js
   const editor = CodeMirror.fromTextArea(document.getElementById("code"));
   editor.setOption("theme", "ctp-mocha"); // set theme to Catppuccin Mocha
