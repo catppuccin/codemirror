@@ -12,26 +12,26 @@
 </p>
 
 <p align="center">
-	<img src="assets/preview.webp"/>
+	<img src="assets/previews/preview.webp"/>
 </p>
 
 ## Previews
 
 <details>
 <summary>🌻 Latte</summary>
-<img src="assets/latte-prev.webp"/>
+<img src="assets/previews/latte.webp"/>
 </details>
 <details>
 <summary>🪴 Frappé</summary>
-<img src="assets/frappe-prev.webp"/>
+<img src="assets/previews/frappe.webp"/>
 </details>
 <details>
 <summary>🌺 Macchiato</summary>
-<img src="assets/macchiato-prev.webp"/>
+<img src="assets/previews/macchiato.webp"/>
 </details>
 <details>
 <summary>🌿 Mocha</summary>
-<img src="assets/mocha-prev.webp"/>
+<img src="assets/previews/mocha.webp"/>
 </details>
 
 ## Usage
@@ -41,15 +41,17 @@ From the [official CodeMirror docs](https://codemirror.net/5/doc/manual.html#:~:
 > You must make sure the desired CSS file defining the corresponding .cm-s-[name] styles is loaded (see the theme directory in the distribution).
 
 1. Make sure to add desired css file to your project by copying it from this repository
-2. Set CodeMirror editor instance's `theme` option to the name corresponding to your palette choice from following table. 
+2. Set CodeMirror editor instance's `theme` option to the name corresponding to your palette choice from following table.
+
 ```js
-  const editor = CodeMirror.fromTextArea(document.getElementById("code"));
-  editor.setOption("theme", "ctp-mocha"); // set theme to Catppuccin Mocha
+const editor = CodeMirror.fromTextArea(document.getElementById("code"));
+editor.setOption("theme", "ctp-mocha"); // set theme to Catppuccin Mocha
 ```
+
 Check out the [demo](demo) for reference.
 
-| Palette   |     Name      |
-|-----------|---------------|
+| Palette   | Name          |
+| --------- | ------------- |
 | Latte     | ctp-latte     |
 | Frappé    | ctp-frappe    |
 | Macchiato | ctp-macchiato |
@@ -57,17 +59,19 @@ Check out the [demo](demo) for reference.
 
 ## 🙋 FAQ
 
--	Q: **_Will this work with latest version of CodeMirror (v6)?_**\
-	A: No. It will need additional work to port v6.
+-   Q: **_Will this work with latest version of CodeMirror (v6)?_**\
+    A: No. It will need additional work to port v6.
 
 ## 💝 Thanks to
 
 **Current Maintainer(s)**
-- [griimick](https://github.com/griimick)
+
+-   [griimick](https://github.com/griimick)
 
 **Inspiration and Contribution**
-- [marijnh](https://github.com/marijnh) for [CodeMirror](https://github.com/codemirror/codemirror5)
-- [ghostx31](https://github.com/ghostx31/) for [catppuccin/joplin](https://github.com/catppuccin/joplin)
+
+-   [marijnh](https://github.com/marijnh) for [CodeMirror](https://github.com/codemirror/codemirror5)
+-   [ghostx31](https://github.com/ghostx31/) for [catppuccin/joplin](https://github.com/catppuccin/joplin)
 
 &nbsp;
 
