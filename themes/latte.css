@@ -1,58 +1,33 @@
 div.cm-s-ctp-latte.CodeMirror {
-  --ctp-rosewater: 222, 149, 132;
-  --ctp-flamingo: 221, 120, 120;
-  --ctp-pink: 236, 131, 208;
-  --ctp-mauve: 136, 57, 239;
-  --ctp-red: 210, 15, 57;
-  --ctp-maroon: 230, 69, 83;
-  --ctp-peach: 254, 100, 11;
-  --ctp-yellow: 228, 147, 32;
-  --ctp-green: 64, 160, 43;
-  --ctp-teal: 23, 146, 153;
-  --ctp-sky: 4, 165, 229;
-  --ctp-sapphire: 32, 159, 181;
-  --ctp-blue: 42, 110, 245;
-  --ctp-lavender: 114, 135, 253;
-  --ctp-text: 76, 79, 105;
-  --ctp-subtext1: 92, 95, 119;
-  --ctp-subtext0: 108, 111, 133;
-  --ctp-overlay2: 124, 127, 147;
-  --ctp-overlay1: 140, 143, 161;
-  --ctp-overlay0: 156, 160, 176;
-  --ctp-surface2: 172, 176, 190;
-  --ctp-surface1: 188, 192, 204;
-  --ctp-surface0: 204, 208, 218;
-  --ctp-base: 239, 241, 245;
-  --ctp-mantle: 230, 233, 239;
-  --ctp-crust: 220, 224, 232;
-  --bg0: rgb(var(--ctp-base));
-  --bg1: rgb(var(--ctp-overlay1));
-  --bg4: rgb(var(--ctp-overlay0));
-  --fg: rgb(var(--ctp-text));
-  --fg3: rgb(var(--ctp-subtext0));
-  --gray: rgb(var(--ctp-subtext1));
-  --blue: rgb(var(--ctp-blue));
-  --yellow: rgb(var(--ctp-yellow));
-  --aqua: rgb(var(--ctp-blue));
-  --orange: rgb(var(--ctp-peach));
-  --current-line: rgb(var(--ctp-surface0));
-  --selection: rgb(var(--ctp-surface2));
-  --atom: rgb(var(--ctp-lavender));
-  --cursor: rgb(var(--ctp-overlay1));
-  --keyword: rgb(var(--ctp-red));
-  --operator: rgb(var(--ctp-sky));
-  --number: rgb(var(--ctp-peach));
-  --definition: rgb(var(--ctp-blue));
-  --string: rgb(var(--ctp-green));
+  --bg0: #eff1f5;
+  --bg1: #8c8fa1;
+  --bg4: #9ca0b0;
+  --fg: #4c4f69;
+  --fg3: #6c6f85;
+  --gray: #5c5f77;
+  --blue: #1e66f5;
+  --yellow: #df8e1d;
+  --aqua: #1e66f5;
+  --orange: #fe640b;
+  --primary-bg: #eff1f5;
+  --current-line: #ccd0da;
+  --selection: #acb0be;
+  --atom: #7287fd;
+  --cursor: #8c8fa1;
+  --keyword: #d20f39;
+  --operator: #04a5e5;
+  --number: #fe640b;
+  --definition: #1e66f5;
+  --string: #40a02b;
 }
 
 .cm-s-ctp-latte.CodeMirror,
 .cm-s-ctp-latte .CodeMirror-gutters {
-  background-color: var(--bg0);
+  background-color: var(--primary-bg);
   color: var(--fg3);
 }
 .cm-s-ctp-latte .CodeMirror-gutters {
-  background: var(--bg0);
+  background: var(--primary-bg);
   border-right: 0px;
 }
 .cm-s-ctp-latte .CodeMirror-linenumber {

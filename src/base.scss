@@ -1,0 +1,139 @@
+// Ported from https://codemirror.net/5/theme/gruvbox-dark.css.
+
+div.#{$selector}.CodeMirror {
+	--bg0: #{$base};
+	--bg1: #{$overlay1};
+	--bg4: #{$overlay0};
+	--fg: #{$text};
+	--fg3: #{$subtext0};
+	--gray: #{$subtext1};
+	--blue: #{$blue};
+	--yellow: #{$yellow};
+	--aqua: #{$blue};
+	--orange: #{$peach};
+
+	--primary-bg: #{$base};
+	--current-line: #{$surface0};
+	--selection: #{$surface2};
+	--atom: #{$lavender};
+	--cursor: #{$overlay1};
+	--keyword: #{$red};
+	--operator: #{$sky};
+	--number: #{$peach};
+	--definition: #{$blue};
+	--string: #{$green};
+}
+
+.#{$selector} {
+	&.CodeMirror,
+	.CodeMirror-gutters {
+		background-color: var(--primary-bg);
+		color: var(--fg3);
+	}
+
+	.CodeMirror-gutters {
+		background: var(--primary-bg);
+		border-right: 0px;
+	}
+
+	.CodeMirror-linenumber {
+		color: var(--bg4);
+	}
+
+	.CodeMirror-cursor {
+		border-left: 1px solid var(--fg);
+	}
+
+	&.cm-fat-cursor .CodeMirror-cursor {
+		background-color: var(--cursor) !important;
+	}
+
+	.cm-animate-fat-cursor {
+		background-color: var(--cursor) !important;
+	}
+
+	div.CodeMirror-selected {
+		background: var(--selection);
+	}
+
+	span.cm-meta {
+		color: var(--blue);
+	}
+
+	span.cm-comment {
+		color: var(--gray);
+	}
+
+	span.cm-number {
+		color: var(--number);
+	}
+	span.cm-atom {
+		color: var(--atom);
+	}
+
+	span.cm-keyword {
+		color: var(--keyword);
+	}
+
+	span.cm-variable {
+		color: var(--fg);
+	}
+
+	span.cm-variable-2 {
+		color: var(--fg);
+	}
+
+	span.cm-variable-3,
+	.cm-s-gruvbox-dark span.cm-type {
+		color: var(--yellow);
+	}
+
+	span.cm-operator {
+		color: var(--operator);
+	}
+
+	span.cm-callee {
+		color: var(--fg);
+	}
+
+	span.cm-def {
+		color: var(--definition);
+	}
+
+	span.cm-property {
+		color: var(--fg);
+	}
+
+	span.cm-string {
+		color: var(--string);
+	}
+
+	span.cm-string-2 {
+		color: var(--aqua);
+	}
+
+	span.cm-qualifier {
+		color: var(--aqua);
+	}
+
+	span.cm-attribute {
+		color: var(--aqua);
+	}
+
+	.CodeMirror-activeline-background {
+		background: var(--current-line);
+	}
+
+	.CodeMirror-matchingbracket {
+		background: var(--gray);
+		color: var(--bg0) !important;
+	}
+
+	span.cm-builtin {
+		color: var(--orange);
+	}
+
+	span.cm-tag {
+		color: var(--orange);
+	}
+}
