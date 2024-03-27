@@ -1,24 +1,26 @@
-<!doctype html>
-
-<title>CodeMirror: Catppuccin Demo</title>
-<meta charset="utf-8" />
-<link rel="stylesheet" href="demo/codemirror.css">
-<link rel="stylesheet" href="demo/custom.css">
-<link rel="stylesheet" href="ctp-mocha.css">
-<link rel="stylesheet" href="ctp-macchiato.css">
-<link rel="stylesheet" href="ctp-frappe.css">
-<link rel="stylesheet" href="ctp-latte.css">
-<script src="demo/codemirror.js"></script>
-<script src="demo/javascript.js"></script>
-<script src="demo/active-line.js"></script>
-<article>
-  <form>
-  <div class="outer osx">
-    <div class="dot red"></div>
-    <div class="dot amber"></div>
-    <div class="dot green"></div>
-  </div>
-    <textarea id="code" name="code">
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Catppuccin for CodeMirror</title>
+		<link rel="stylesheet" href="demo/codemirror.css" />
+		<link rel="stylesheet" href="demo/custom.css" />
+		<link rel="stylesheet" href="themes/mocha.css" />
+		<link rel="stylesheet" href="themes/macchiato.css" />
+		<link rel="stylesheet" href="themes/frappe.css" />
+		<link rel="stylesheet" href="themes/latte.css" />
+		<script src="demo/codemirror.js"></script>
+		<script src="demo/javascript.js"></script>
+		<script src="demo/active-line.js"></script>
+	</head>
+	<body>
+		<form>
+			<div class="outer osx">
+				<div class="dot red"></div>
+				<div class="dot amber"></div>
+				<div class="dot green"></div>
+			</div>
+			<textarea id="code" name="code">
 function findSequence(goal) {
   function find(start, history) {
     if (start == goal)
@@ -30,14 +32,18 @@ function findSequence(goal) {
              find(start * 3, "(" + history + " * 3)");
   }
   return find(1, "1");
-}</textarea></form>
+}</textarea
+			>
+		</form>
 
-  <p style="text-align: center" ><select onchange="selectTheme()" id=select>
-      <option value="ctp-mocha">🌿 Mocha</option>
-      <option value="ctp-macchiato">🌺 Macchiato</option>
-      <option value="ctp-frappe">🪴 Frappé</option>
-      <option value="ctp-latte">🌻 Latte</option>
-    </select>
-  </p>
-</article>
-<script defer src="demo/custom.js"></script>
+		<p style="text-align: center">
+			<select onchange="selectTheme()" id="select">
+				<option value="ctp-mocha">🌿 Mocha</option>
+				<option value="ctp-macchiato">🌺 Macchiato</option>
+				<option value="ctp-frappe">🪴 Frappé</option>
+				<option value="ctp-latte">🌻 Latte</option>
+			</select>
+		</p>
+	</body>
+	<script defer src="demo/custom.js"></script>
+</html>

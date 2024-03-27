@@ -1,58 +1,33 @@
 div.cm-s-ctp-frappe.CodeMirror {
-  --ctp-rosewater: 242, 213, 207;
-  --ctp-flamingo: 238, 190, 190;
-  --ctp-pink: 244, 184, 228;
-  --ctp-mauve: 202, 158, 230;
-  --ctp-red: 231, 130, 132;
-  --ctp-maroon: 234, 153, 156;
-  --ctp-peach: 239, 159, 118;
-  --ctp-yellow: 229, 200, 144;
-  --ctp-green: 166, 209, 137;
-  --ctp-teal: 129, 200, 190;
-  --ctp-sky: 153, 209, 219;
-  --ctp-sapphire: 133, 193, 220;
-  --ctp-blue: 140, 170, 238;
-  --ctp-lavender: 186, 187, 241;
-  --ctp-text: 198, 206, 239;
-  --ctp-subtext1: 181, 189, 220;
-  --ctp-subtext0: 165, 172, 201;
-  --ctp-overlay2: 148, 155, 183;
-  --ctp-overlay1: 131, 138, 164;
-  --ctp-overlay0: 115, 120, 145;
-  --ctp-surface2: 98, 103, 126;
-  --ctp-surface1: 81, 86, 108;
-  --ctp-surface0: 65, 69, 89;
-  --ctp-base: 48, 52, 70;
-  --ctp-mantle: 41, 44, 60;
-  --ctp-crust: 35, 38, 52;
-  --bg0: rgb(var(--ctp-base));
-  --bg1: rgb(var(--ctp-overlay1));
-  --bg4: rgb(var(--ctp-overlay0));
-  --fg: rgb(var(--ctp-text));
-  --fg3: rgb(var(--ctp-subtext0));
-  --gray: rgb(var(--ctp-subtext1));
-  --blue: rgb(var(--ctp-blue));
-  --yellow: rgb(var(--ctp-yellow));
-  --aqua: rgb(var(--ctp-blue));
-  --orange: rgb(var(--ctp-peach));
-  --current-line: rgb(var(--ctp-surface0));
-  --selection: rgb(var(--ctp-surface2));
-  --atom: rgb(var(--ctp-lavender));
-  --cursor: rgb(var(--ctp-overlay1));
-  --keyword: rgb(var(--ctp-red));
-  --operator: rgb(var(--ctp-sky));
-  --number: rgb(var(--ctp-peach));
-  --definition: rgb(var(--ctp-blue));
-  --string: rgb(var(--ctp-green));
+  --bg0: #303446;
+  --bg1: #838ba7;
+  --bg4: #737994;
+  --fg: #c6d0f5;
+  --fg3: #a5adce;
+  --gray: #b5bfe2;
+  --blue: #8caaee;
+  --yellow: #e5c890;
+  --aqua: #8caaee;
+  --orange: #ef9f76;
+  --primary-bg: #303446;
+  --current-line: #414559;
+  --selection: #626880;
+  --atom: #babbf1;
+  --cursor: #838ba7;
+  --keyword: #e78284;
+  --operator: #99d1db;
+  --number: #ef9f76;
+  --definition: #8caaee;
+  --string: #a6d189;
 }
 
 .cm-s-ctp-frappe.CodeMirror,
 .cm-s-ctp-frappe .CodeMirror-gutters {
-  background-color: var(--bg0);
+  background-color: var(--primary-bg);
   color: var(--fg3);
 }
 .cm-s-ctp-frappe .CodeMirror-gutters {
-  background: var(--bg0);
+  background: var(--primary-bg);
   border-right: 0px;
 }
 .cm-s-ctp-frappe .CodeMirror-linenumber {
