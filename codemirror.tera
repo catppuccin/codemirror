@@ -1,12 +1,14 @@
 ---
-accent: mauve
 whiskers:
   version: "2.3.0"
   matrix:
     - flavor
   filename: "themes/{{ flavor.identifier }}.css"
 ---
-div.cm-s-ctp-{{ flavor.identifier }}.CodeMirror {
+
+{%- set prefix = ".cm-s-ctp-" ~   flavor.identifier -%}
+
+div{{ prefix }}.CodeMirror {
   --bg0: #{{ base.hex }};
   --bg1: #{{ overlay1.hex }};
   --bg4: #{{ overlay0.hex }};
@@ -29,89 +31,89 @@ div.cm-s-ctp-{{ flavor.identifier }}.CodeMirror {
   --string: #{{ green.hex }};
 }
 
-.cm-s-ctp-{{ flavor.identifier }}.CodeMirror,
-.cm-s-ctp-{{ flavor.identifier }} .CodeMirror-gutters {
+{{ prefix }}.CodeMirror,
+{{ prefix }} .CodeMirror-gutters {
   background-color: var(--primary-bg);
   color: var(--fg3);
 }
-.cm-s-ctp-{{ flavor.identifier }} .CodeMirror-gutters {
+{{ prefix }} .CodeMirror-gutters {
   background: var(--primary-bg);
   border-right: 0px;
 }
-.cm-s-ctp-{{ flavor.identifier }} .CodeMirror-linenumber {
+{{ prefix }} .CodeMirror-linenumber {
   color: var(--bg4);
 }
-.cm-s-ctp-{{ flavor.identifier }} .CodeMirror-cursor {
+{{ prefix }} .CodeMirror-cursor {
   border-left: 1px solid var(--fg);
 }
-.cm-s-ctp-{{ flavor.identifier }}.cm-fat-cursor .CodeMirror-cursor {
+{{ prefix }}.cm-fat-cursor .CodeMirror-cursor {
   background-color: var(--cursor) !important;
 }
-.cm-s-ctp-{{ flavor.identifier }} .cm-animate-fat-cursor {
+{{ prefix }} .cm-animate-fat-cursor {
   background-color: var(--cursor) !important;
 }
-.cm-s-ctp-{{ flavor.identifier }} div.CodeMirror-selected {
+{{ prefix }} div.CodeMirror-selected {
   background: var(--selection);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-meta {
+{{ prefix }} span.cm-meta {
   color: var(--blue);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-comment {
+{{ prefix }} span.cm-comment {
   color: var(--gray);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-number {
+{{ prefix }} span.cm-number {
   color: var(--number);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-atom {
+{{ prefix }} span.cm-atom {
   color: var(--atom);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-keyword {
+{{ prefix }} span.cm-keyword {
   color: var(--keyword);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-variable {
+{{ prefix }} span.cm-variable {
   color: var(--fg);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-variable-2 {
+{{ prefix }} span.cm-variable-2 {
   color: var(--fg);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-variable-3,
-.cm-s-ctp-{{ flavor.identifier }} .cm-s-gruvbox-dark span.cm-type {
+{{ prefix }} span.cm-variable-3,
+{{ prefix }} .cm-s-gruvbox-dark span.cm-type {
   color: var(--yellow);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-operator {
+{{ prefix }} span.cm-operator {
   color: var(--operator);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-callee {
+{{ prefix }} span.cm-callee {
   color: var(--fg);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-def {
+{{ prefix }} span.cm-def {
   color: var(--definition);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-property {
+{{ prefix }} span.cm-property {
   color: var(--fg);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-string {
+{{ prefix }} span.cm-string {
   color: var(--string);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-string-2 {
+{{ prefix }} span.cm-string-2 {
   color: var(--aqua);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-qualifier {
+{{ prefix }} span.cm-qualifier {
   color: var(--aqua);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-attribute {
+{{ prefix }} span.cm-attribute {
   color: var(--aqua);
 }
-.cm-s-ctp-{{ flavor.identifier }} .CodeMirror-activeline-background {
+{{ prefix }} .CodeMirror-activeline-background {
   background: var(--current-line);
 }
-.cm-s-ctp-{{ flavor.identifier }} .CodeMirror-matchingbracket {
+{{ prefix }} .CodeMirror-matchingbracket {
   background: var(--gray);
   color: var(--bg0) !important;
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-builtin {
+{{ prefix }} span.cm-builtin {
   color: var(--orange);
 }
-.cm-s-ctp-{{ flavor.identifier }} span.cm-tag {
+{{ prefix }} span.cm-tag {
   color: var(--orange);
 }
