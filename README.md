@@ -66,8 +66,6 @@ Check out the [demo](demo) for reference.
 
 **Current Maintainer(s)**
 
--   [uncenter](https://github.com/uncenter)
-
 **Past Maintainer(s)**
 
 -   [griimick](https://github.com/griimick)
