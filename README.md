@@ -66,6 +66,8 @@ Check out the [demo](demo) for reference.
 
 **Current Maintainer(s)**
 
+This repository currently has no maintainers.
+
 **Past Maintainer(s)**
 
 -   [griimick](https://github.com/griimick)
