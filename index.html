@@ -1,49 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 	<head>
 		<meta charset="utf-8" />
 		<title>Catppuccin for CodeMirror</title>
-		<link rel="stylesheet" href="demo/codemirror.css" />
-		<link rel="stylesheet" href="demo/custom.css" />
-		<link rel="stylesheet" href="themes/mocha.css" />
-		<link rel="stylesheet" href="themes/macchiato.css" />
-		<link rel="stylesheet" href="themes/frappe.css" />
-		<link rel="stylesheet" href="themes/latte.css" />
-		<script src="demo/codemirror.js"></script>
-		<script src="demo/javascript.js"></script>
-		<script src="demo/active-line.js"></script>
+		<link rel="stylesheet" href="demo/main.css" />
 	</head>
 	<body>
-		<form>
-			<div class="outer osx">
+		<form class="window">
+			<div class="titlebar">
 				<div class="dot red"></div>
 				<div class="dot amber"></div>
 				<div class="dot green"></div>
+				<select id="select">
+					<option value="mocha">🌿 Mocha</option>
+					<option value="macchiato">🌺 Macchiato</option>
+					<option value="frappe">🪴 Frappé</option>
+					<option value="latte">🌻 Latte</option>
+				</select>
 			</div>
-			<textarea id="code" name="code">
-function findSequence(goal) {
-  function find(start, history) {
-    if (start == goal)
-      return history;
-    else if (start > goal)
-      return null;
-    else
-      return find(start + 5, "(" + history + " + 5)") ||
-             find(start * 3, "(" + history + " * 3)");
-  }
-  return find(1, "1");
-}</textarea
-			>
+			<div id="code" name="code"></div>
 		</form>
-
-		<p style="text-align: center">
-			<select onchange="selectTheme()" id="select">
-				<option value="ctp-mocha">🌿 Mocha</option>
-				<option value="ctp-macchiato">🌺 Macchiato</option>
-				<option value="ctp-frappe">🪴 Frappé</option>
-				<option value="ctp-latte">🌻 Latte</option>
-			</select>
-		</p>
 	</body>
-	<script defer src="demo/custom.js"></script>
+	<script type="importmap">
+		{
+			"imports": {
+				"codemirror": "https://esm.sh/codemirror@6.0",
+				"@codemirror/view": "https://esm.sh/@codemirror/view@6",
+				"@codemirror/state": "https://esm.sh/@codemirror/state@6",
+				"@codemirror/lang-javascript": "https://esm.sh/@codemirror/lang-javascript@6",
+				"@codemirror/language": "https://esm.sh/@codemirror/language@6",
+				"@lezer/highlight": "https://esm.sh/@lezer/highlight",
+				"@catppuccin/palette": "https://esm.sh/@catppuccin/palette@1.7.1"
+			}
+		}
+	</script>
+	<script type="module" src="demo/main.js"></script>
 </html>
