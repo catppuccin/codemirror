@@ -37,22 +37,17 @@ const themes = {
 	latte: catppuccinLatte,
 }
 
-const hsl2text = ({ h, s, l }) => `hsl(${h}, ${s * 100}%, ${l * 100}%)`
-
 const input = document.getElementById("select")
 const selectTheme = () => {
 	const theme = input.options[input.selectedIndex].value
-	const background = flavors[theme].colors.base.hsl
-	const color = flavors[theme].colors.text.hsl
-	const hover = structuredClone(flavors[theme].colors.base.hsl)
-	hover.l += flavors[theme].dark ? 0.1 : -0.1
+	const colors = flavors[theme].colors
 
 	location.hash = "#" + theme
 
 	// Set styles for the demo.
-	document.documentElement.style.setProperty("--bg", hsl2text(background))
-	document.documentElement.style.setProperty("--hover", hsl2text(hover))
-	document.documentElement.style.setProperty("--color", hsl2text(color))
+	document.documentElement.style.setProperty("--bg", colors.base.hex)
+	document.documentElement.style.setProperty("--hover", colors.surface0.hex)
+	document.documentElement.style.setProperty("--color", colors.text.hex)
 
 	// Update editor with selected theme.
 	editor.dispatch({
