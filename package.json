@@ -1,9 +1,8 @@
 {
 	"name": "@catppuccin/codemirror",
 	"version": "6.0.0",
-	"description": "Catppuccin themes for the CodeMirror code editor",
+	"description": "Soothing pastel themes for CodeMirror",
 	"scripts": {
-		"test": "echo 'Life is beautiful.'",
 		"prepare": "cm-buildhelper src/catppuccin.ts"
 	},
 	"keywords": [
@@ -11,9 +10,9 @@
 		"code"
 	],
 	"author": {
-		"name": "Ulysse Buonomo",
-		"email": "buonomo.ulysse@gmail.com",
-		"url": "https://ulysse.md"
+		"name": "Catppuccin Org",
+		"email": "releases@catppuccin.com",
+		"url": "https://catppuccin.com"
 	},
 	"type": "module",
 	"main": "dist/index.cjs",
@@ -37,6 +36,6 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/codemirror/theme-one-dark.git"
+		"url": "https://github.com/catppuccin/codemirror.git"
 	}
 }
