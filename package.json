@@ -33,6 +33,9 @@
     "build": "cm-buildhelper src/catppuccin.ts",
     "watch": "nodemon --watch src -e ts --exec 'pnpm build'"
   },
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.cjs",
   "exports": {
     "import": "./dist/index.js",
