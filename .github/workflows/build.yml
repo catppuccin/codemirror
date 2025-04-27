@@ -17,4 +17,5 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
-      - uses: pnpm build
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build

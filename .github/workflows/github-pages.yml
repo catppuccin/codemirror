@@ -20,7 +20,8 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
-      - uses: pnpm build
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
       - run: cp dist/index.js demo
       - uses: actions/upload-pages-artifact@v3
         with:
