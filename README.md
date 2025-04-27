@@ -19,19 +19,19 @@
 
 <details>
 <summary>🌻 Latte</summary>
-<a href="https://catppuccin.github.io/codemirror/#latte"><img src="assets/latte.webp"/></a>
+<a href="https://codemirror.catppuccin.com/#latte"><img src="assets/latte.webp"/></a>
 </details>
 <details>
 <summary>🪴 Frappé</summary>
-<a href="https://catppuccin.github.io/codemirror/#frappe"><img src="assets/frappe.webp"/></a>
+<a href="https://codemirror.catppuccin.com/#frappe"><img src="assets/frappe.webp"/></a>
 </details>
 <details>
 <summary>🌺 Macchiato</summary>
-<a href="https://catppuccin.github.io/codemirror/#macchiato"><img src="assets/macchiato.webp"/></a>
+<a href="https://codemirror.catppuccin.com/#macchiato"><img src="assets/macchiato.webp"/></a>
 </details>
 <details>
 <summary>🌿 Mocha</summary>
-<a href="https://catppuccin.github.io/codemirror/#mocha"><img src="assets/mocha.webp"/></a>
+<a href="https://codemirror.catppuccin.com/#mocha"><img src="assets/mocha.webp"/></a>
 </details>
 
 ## Usage
@@ -57,7 +57,7 @@
    })
    ```
 
-Check out the [demo](codemirror.catppuccin.com) for reference.
+Check out the [demo](https://codemirror.catppuccin.com) for reference.
 
 ## 🙋 FAQ
 
