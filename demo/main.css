@@ -1,0 +1,59 @@
+body {
+  background-color: var(--crust);
+  color: var(--text);
+}
+
+a {
+  color: var(--blue);
+}
+
+.window {
+  border-radius: 7px;
+  overflow: auto;
+  box-shadow: hsl(0deg 0% 0% / 30%) 0 1px 3px;
+}
+
+.titlebar {
+  background: var(--crust);
+  padding: 5px 10px;
+  margin-bottom: -1px;
+  select {
+    background-color: transparent;
+    outline: none;
+    color: var(--text);
+
+    padding: 0;
+    border: 0.4rem solid;
+    border-color: transparent;
+    border-radius: 1rem;
+
+    &:hover {
+      background-color: var(--surface0);
+      border-color: var(--surface0);
+    }
+  }
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #f9f9f9;
+  border-radius: 50%;
+  margin: 0 4px 0 0;
+}
+
+.dot.red {
+  background: #ff6057;
+  border: 1px solid #e14640;
+}
+
+.dot.amber {
+  background: #ffbd2e;
+  border: 1px solid #dfa123;
+}
+
+.dot.green {
+  background: #27c93f;
+  border: 1px solid #1dad2b;
+}

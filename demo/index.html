@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Catppuccin for CodeMirror</title>
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
+    <h1>
+      Catppuccin for <a href="https://codemirror.net/">CodeMirror<sup>v6</sup></a>
+    </h1>
+    <form class="window">
+      <div class="titlebar">
+        <div class="dot red"></div>
+        <div class="dot amber"></div>
+        <div class="dot green"></div>
+        <select id="select">
+          <option value="mocha">🌿 Mocha</option>
+          <option value="macchiato">🌺 Macchiato</option>
+          <option value="frappe">🪴 Frappé</option>
+          <option value="latte">🌻 Latte</option>
+        </select>
+      </div>
+      <div id="code" name="code"></div>
+    </form>
+  </body>
+  <script type="importmap">
+    {
+      "imports": {
+        "codemirror": "https://esm.sh/codemirror@6.0",
+        "@codemirror/view": "https://esm.sh/@codemirror/view@6",
+        "@codemirror/state": "https://esm.sh/@codemirror/state@6",
+        "@codemirror/lang-javascript": "https://esm.sh/@codemirror/lang-javascript@6",
+        "@codemirror/language": "https://esm.sh/@codemirror/language@6",
+        "@lezer/highlight": "https://esm.sh/@lezer/highlight",
+        "@catppuccin/palette": "https://esm.sh/@catppuccin/palette@1.7.1",
+        "@catppuccin/codemirror": "./index.js"
+      }
+    }
+  </script>
+  <script type="module" src="./main.js"></script>
+</html>
