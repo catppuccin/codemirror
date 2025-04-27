@@ -13,6 +13,12 @@
     "type": "git",
     "url": "https://github.com/catppuccin/codemirror.git"
   },
+  "bugs": {
+    "url": "https://github.com/catppuccin/codemirror/issues"
+  },
+  "sponsor": {
+    "url": "https://opencollective.com/catppuccin"
+  },
   "keywords": [
     "editor",
     "code"
@@ -24,7 +30,8 @@
   },
   "scripts": {
     "prepare": "pnpm run build",
-    "build": "cm-buildhelper src/catppuccin.ts"
+    "build": "cm-buildhelper src/catppuccin.ts",
+    "watch": "nodemon --watch src -e ts --exec 'pnpm build'"
   },
   "main": "dist/index.cjs",
   "exports": {
@@ -34,14 +41,15 @@
   "types": "dist/index.d.ts",
   "module": "dist/index.js",
   "dependencies": {
-    "@lezer/highlight": "^1.0.0",
+    "@catppuccin/palette": "^1.7.1",
     "@codemirror/language": "^6.0.0",
     "@codemirror/state": "^6.0.0",
     "@codemirror/view": "^6.0.0",
-    "@catppuccin/palette": "^1.1.1"
+    "@lezer/highlight": "^1.0.0"
   },
   "devDependencies": {
-    "@codemirror/buildhelper": "^1.0.0"
+    "@codemirror/buildhelper": "^1.0.0",
+    "nodemon": "^3.1.10"
   },
   "packageManager": "pnpm@10.9.0"
 }
