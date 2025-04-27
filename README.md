@@ -12,49 +12,42 @@
 </p>
 
 <p align="center">
-	<img src="assets/previews/preview.webp"/>
+	<img src="assets/preview.webp"/>
 </p>
 
 ## Previews
 
 <details>
 <summary>🌻 Latte</summary>
-<a href="https://catppuccin.github.io/codemirror/#latte"><img src="assets/previews/latte.webp"/></a>
+<a href="https://catppuccin.github.io/codemirror/#latte"><img src="assets/latte.webp"/></a>
 </details>
 <details>
 <summary>🪴 Frappé</summary>
-<a href="https://catppuccin.github.io/codemirror/#frappe"><img src="assets/previews/frappe.webp"/></a>
+<a href="https://catppuccin.github.io/codemirror/#frappe"><img src="assets/frappe.webp"/></a>
 </details>
 <details>
 <summary>🌺 Macchiato</summary>
-<a href="https://catppuccin.github.io/codemirror/#macchiato"><img src="assets/previews/macchiato.webp"/></a>
+<a href="https://catppuccin.github.io/codemirror/#macchiato"><img src="assets/macchiato.webp"/></a>
 </details>
 <details>
 <summary>🌿 Mocha</summary>
-<a href="https://catppuccin.github.io/codemirror/#mocha"><img src="assets/previews/mocha.webp"/></a>
+<a href="https://catppuccin.github.io/codemirror/#mocha"><img src="assets/mocha.webp"/></a>
 </details>
 
 ## Usage
 
 ```js
 import { EditorView, basicSetup } from "codemirror"
-import { catppuccinMocha } from "@catppuccin/codemirror"
+import { catppuccinLatte } from "@catppuccin/codemirror"
 
 const editor = new EditorView({
 	doc: "...",
 	parent: document.body
-	extensions: [basicSetup, catppuccinMocha],
+	extensions: [basicSetup, catppuccinLatte], // or catppuccinFrappe, catppuccinMacchiato, catppuccinMocha
 })
 ```
 
-Check out the [demo](https://catppuccin.github.io/codemirror/) for reference.
-
-| Palette   | Name                |
-| --------- | ------------------- |
-| Latte     | catppuccinLatte     |
-| Frappé    | catppuccinFrappe    |
-| Macchiato | catppuccinMacchiato |
-| Mocha     | catppuccinMocha     |
+Check out the [demo](codemirror.catppuccin.com) for reference.
 
 ## 🙋 FAQ
 

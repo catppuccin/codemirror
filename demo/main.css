@@ -1,71 +1,59 @@
 body {
-	background: hsl(0deg 0% 90%);
+  background-color: var(--crust);
+  color: var(--text);
+}
+
+a {
+  color: var(--blue);
 }
 
 .window {
-	top: 50vh;
-	left: 50vw;
-	position: absolute;
-	transform: translatex(-50%) translatey(-50%);
-	width: 80%;
-	max-width: fit-content;
-	border-radius: 7px;
-	overflow: hidden;
-	box-shadow: hsl(0deg 0% 0% / 30%) 0 1px 3px;
+  border-radius: 7px;
+  overflow: auto;
+  box-shadow: hsl(0deg 0% 0% / 30%) 0 1px 3px;
 }
 
 .titlebar {
-	background: var(--bg);
-	padding: 5px 10px;
-	margin-bottom: -1px;
-	select {
-		background-color: transparent;
-		outline: none;
+  background: var(--crust);
+  padding: 5px 10px;
+  margin-bottom: -1px;
+  select {
+    background-color: transparent;
+    outline: none;
+    color: var(--text);
 
-		font-family:
-			-apple-system,
-			BlinkMacSystemFont,
-			Segoe UI,
-			Helvetica,
-			Arial,
-			sans-serif,
-			"Apple Color Emoji",
-			"Segoe UI Emoji";
+    padding: 0;
+    border: 0.4rem solid;
+    border-color: transparent;
+    border-radius: 1rem;
 
-		color: var(--color);
-
-		padding: 0;
-		border: 0.4rem solid;
-		border-color: transparent;
-		border-radius: 1rem;
-
-		&:hover {
-			background-color: var(--hover);
-			border-color: var(--hover);
-		}
-	}
+    &:hover {
+      background-color: var(--surface0);
+      border-color: var(--surface0);
+    }
+  }
 }
 
 .dot {
-	display: inline-block;
-	width: 10px;
-	height: 10px;
-	background: #f9f9f9;
-	border-radius: 50%;
-	margin: 0 4px 0 0;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #f9f9f9;
+  border-radius: 50%;
+  margin: 0 4px 0 0;
 }
 
 .dot.red {
-	background: #ff6057;
-	border: 1px solid #e14640;
+  background: #ff6057;
+  border: 1px solid #e14640;
 }
 
 .dot.amber {
-	background: #ffbd2e;
-	border: 1px solid #dfa123;
+  background: #ffbd2e;
+  border: 1px solid #dfa123;
 }
 
 .dot.green {
-	background: #27c93f;
-	border: 1px solid #1dad2b;
+  background: #27c93f;
+  border: 1px solid #1dad2b;
 }
