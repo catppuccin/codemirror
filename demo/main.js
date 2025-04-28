@@ -109,3 +109,20 @@ const defaultTheme = location.hash.slice(1);
 if (themes[defaultTheme]) input.value = defaultTheme;
 
 selectTheme();
+
+const languageSelector = document.getElementById("language");
+const selectLanguage = () => {
+  const languageFile = languageSelector.value;
+  fetch("./samples/" + languageFile)
+    .then((response) => response.text())
+    .then((text) => {
+      editor.dispatch({
+        changes: {
+          from: 0,
+          to: editor.state.doc.length,
+          insert: text,
+        },
+      });
+    });
+};
+languageSelector.addEventListener("change", selectLanguage);

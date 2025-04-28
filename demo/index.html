@@ -7,18 +7,52 @@
   </head>
   <body>
     <h1>
-      Catppuccin for <a href="https://codemirror.net/">CodeMirror<sup>v6</sup></a>
+      Catppuccin for
+      <a href="https://codemirror.net/">CodeMirror<sup>v6</sup></a>
     </h1>
     <form class="window">
       <div class="titlebar">
         <div class="dot red"></div>
         <div class="dot amber"></div>
         <div class="dot green"></div>
+        <label for="flavor">Flavor:</label>
         <select id="select">
           <option value="mocha">🌿 Mocha</option>
           <option value="macchiato">🌺 Macchiato</option>
           <option value="frappe">🪴 Frappé</option>
           <option value="latte">🌻 Latte</option>
+        </select>
+        <label for="language">Language:</label>
+        <select id="language">
+          <option value="asciidoc.adoc">AsciiDoc</option>
+          <option value="bash.sh">Bash</option>
+          <option value="coffeescript.coffee">CoffeeScript</option>
+          <option value="cpp.cpp">C++</option>
+          <option value="cs.cs">C#</option>
+          <option value="css.css">CSS</option>
+          <option value="dart.dart">Dart</option>
+          <option value="diff.diff">Diff</option>
+          <option value="go.go">Go</option>
+          <option value="haskell.hs">Haskell</option>
+          <option value="html.html">HTML</option>
+          <option value="java.java">Java</option>
+          <option value="javascript.js">JavaScript</option>
+          <option value="json.json">JSON</option>
+          <option value="jsx.jsx">JSX</option>
+          <option value="kotlin.kt">Kotlin</option>
+          <option value="lua.lua">Lua</option>
+          <option value="Makefile">Makefile</option>
+          <option value="markdown.md">Markdown</option>
+          <option value="nix.nix">Nix</option>
+          <option value="php.php">PHP</option>
+          <option value="python.py">Python</option>
+          <option value="rust.rs">Rust</option>
+          <option  value="scala.scala">Scala</option>
+          <option value="sql.sql">SQL</option>
+          <option value="toml.toml">TOML</option>
+          <option value="tsx.tsx">TSX</option>
+          <option selected="selected" value="typescript.ts">TypeScript</option>
+          <option value="yaml.yaml">YAML</option>
         </select>
       </div>
       <div id="code" name="code"></div>
