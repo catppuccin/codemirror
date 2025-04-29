@@ -113,7 +113,7 @@ selectTheme();
 const languageSelector = document.getElementById("language");
 const selectLanguage = () => {
   const languageFile = languageSelector.value;
-  fetch("./samples/" + languageFile)
+  fetch("https://raw.githubusercontent.com/catppuccin/catppuccin/refs/heads/main/samples/" + languageFile)
     .then((response) => response.text())
     .then((text) => {
       editor.dispatch({
