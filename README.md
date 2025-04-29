@@ -1,7 +1,7 @@
 <h3 align="center">
 	<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png" width="100" alt="Logo"/><br/>
 	<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="30" width="0px"/>
-	Catppuccin for <a href="https://codemirror.net/5/">CodeMirror</a><sup>v6</sup>
+	Catppuccin for <a href="https://codemirror.net">CodeMirror</a><sup>v6</sup>
 	<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="30" width="0px"/>
 </h3>
 
@@ -19,40 +19,50 @@
 
 <details>
 <summary>🌻 Latte</summary>
-<a href="https://catppuccin.github.io/codemirror/#latte"><img src="assets/latte.webp"/></a>
+<a href="https://codemirror.catppuccin.com/#latte"><img src="assets/latte.webp"/></a>
 </details>
 <details>
 <summary>🪴 Frappé</summary>
-<a href="https://catppuccin.github.io/codemirror/#frappe"><img src="assets/frappe.webp"/></a>
+<a href="https://codemirror.catppuccin.com/#frappe"><img src="assets/frappe.webp"/></a>
 </details>
 <details>
 <summary>🌺 Macchiato</summary>
-<a href="https://catppuccin.github.io/codemirror/#macchiato"><img src="assets/macchiato.webp"/></a>
+<a href="https://codemirror.catppuccin.com/#macchiato"><img src="assets/macchiato.webp"/></a>
 </details>
 <details>
 <summary>🌿 Mocha</summary>
-<a href="https://catppuccin.github.io/codemirror/#mocha"><img src="assets/mocha.webp"/></a>
+<a href="https://codemirror.catppuccin.com/#mocha"><img src="assets/mocha.webp"/></a>
 </details>
 
 ## Usage
 
-```js
-import { EditorView, basicSetup } from "codemirror"
-import { catppuccinLatte } from "@catppuccin/codemirror"
+1. Install `@catppuccin/codemirror`:
 
-const editor = new EditorView({
-	doc: "...",
-	parent: document.body
-	extensions: [basicSetup, catppuccinLatte], // or catppuccinFrappe, catppuccinMacchiato, catppuccinMocha
-})
-```
+   ```bash
+   npm install @catppuccin/codemirror
+   yarn add @catppuccin/codemirror
+   pnpm add @catppuccin/codemirror
+   ```
 
-Check out the [demo](codemirror.catppuccin.com) for reference.
+2. Import the theme in your project:
+
+   ```js
+   import { EditorView, basicSetup } from "codemirror"
+   import { catppuccinLatte } from "@catppuccin/codemirror"
+
+   const editor = new EditorView({
+     doc: "...",
+     parent: document.body
+     extensions: [basicSetup, catppuccinLatte], // or catppuccinFrappe, catppuccinMacchiato, catppuccinMocha
+   })
+   ```
+
+Check out the [demo](https://codemirror.catppuccin.com) for reference.
 
 ## 🙋 FAQ
 
 - Q: **_Is this compatible with CodeMirror5?_**\
-  A: No. But you can [go back in time](https://github.com/catppuccin/codemirror/tree/aa73c1a1797c97964afcd4a3023353913ec609cb) and find what you want!
+  A: No, see the [v0.0.1](https://github.com/catppuccin/codemirror/tree/v0.0.1) tag for CodeMirror5 support.
 
 ## 💝 Thanks to
 

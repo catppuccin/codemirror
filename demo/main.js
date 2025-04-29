@@ -9,60 +9,32 @@ import {
   catppuccinMocha,
 } from "@catppuccin/codemirror";
 
-const defaultDoc = `module ModuleValidator {
-    import checkChars = CharUtils.notWhiteSpace
+const defaultDoc = `/**
+ * Constructor for <code>AjaxRequest</code> class
+ * @param url the url for the request<p/>
+ */
+function AjaxRequest(url) {
+    var urls = ['www.cnn.com', 5, globalVar]
+    this.request = new XMLHttpRequest()
+    url = url.replace(/^\s*(.*)/, '$1') // skip leading whitespace
+    /* check the url to be in urls */
+    var a = '\u1111z\u11ac'
+    this.foo = new (function () {})()
+    let a = true && false
+    foo()
+    // #
+    console.log('abc)
+}
 
-    export interface HasValidator<T> {
-        validateValue(): Boolean
-    }
+typeof 'nice'
+new Class()
+class NameClass {}
+foo({ abc: 'abcde', "efg": 2 })
+foo.bar({ foo: 'abc' })
+obj.abc = function () {}
 
-    type FooBarAlias = string
-
-    @decorator()
-    class HasValidator implements HasValidator<String> {
-        /* Processed values */
-        static validatedValue: Array<String> = ['', 'aa']
-        private myValue: String
-
-        /**
-         * Constructor for class
-         * @param valueParameter Value for <i>validation</i>
-         */
-        constructor(valueParameter: String) {
-            this.myValue = valueParameter
-            HasValidator.validatedValue.push(value)
-        }
-
-        public validateValue(): Boolean {
-            var resultValue: Boolean = checkChars(this.myValue)
-            return resultValue
-        }
-
-        static createInstance(valueParameter: string): HasValidator {
-            return new HasValidator(valueParameter)
-        }
-    }
-
-    function globalFunction<TypeParameter>(value: TypeParameter) {
-        //global function
-        return 42
-    }
-
-    declare var declareUrl
-    var varUrl = declareUrl.replace(/^\s*(.*)/, '$1').concat('\u1111z\n\u0022')
-    var html = \`<div title='HTML injection'>Injected language fragment</div>\`
-    var hello = () => console.log('hello')
-    HasValidator.createInstance(varUrl).validateValue()
-
-    function acceptsUnion(s: string | number) {
-        if (typeof s === 'string') {
-            s
-        }
-    }
-
-    enum EnumName {
-        EnumMember,
-    }
+;async () => {
+    await Promise.resolve()
 }`;
 
 const themeConfig = new Compartment();
