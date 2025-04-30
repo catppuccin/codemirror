@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Catppuccin for CodeMirror</title>
-    <link rel="stylesheet" href="./main.css" />
+    <link rel="stylesheet" type="text/css" href="./main.css" />
   </head>
   <body>
     <h1>
@@ -12,44 +12,35 @@
     </h1>
     <form class="window">
       <div class="titlebar">
-        <div class="dot red"></div>
-        <div class="dot amber"></div>
-        <div class="dot green"></div>
+        <div>
+          <div class="dot red"></div>
+          <div class="dot amber"></div>
+          <div class="dot green"></div>
+        </div>
         <label for="flavor">Flavor:</label>
-        <select id="select">
+        <select id="flavor-select">
           <option value="mocha">🌿 Mocha</option>
           <option value="macchiato">🌺 Macchiato</option>
           <option value="frappe">🪴 Frappé</option>
           <option value="latte">🌻 Latte</option>
         </select>
         <label for="language">Language:</label>
-        <select id="language">
-          <option value="asciidoc.adoc">AsciiDoc</option>
-          <option value="bash.sh">Bash</option>
-          <option value="coffeescript.coffee">CoffeeScript</option>
+        <select id="language-select">
           <option value="cpp.cpp">C++</option>
           <option value="cs.cs">C#</option>
           <option value="css.css">CSS</option>
-          <option value="dart.dart">Dart</option>
-          <option value="diff.diff">Diff</option>
           <option value="go.go">Go</option>
-          <option value="haskell.hs">Haskell</option>
           <option value="html.html">HTML</option>
           <option value="java.java">Java</option>
           <option value="javascript.js">JavaScript</option>
           <option value="json.json">JSON</option>
           <option value="jsx.jsx">JSX</option>
-          <option value="kotlin.kt">Kotlin</option>
-          <option value="lua.lua">Lua</option>
-          <option value="Makefile">Makefile</option>
           <option value="markdown.md">Markdown</option>
           <option value="nix.nix">Nix</option>
           <option value="php.php">PHP</option>
           <option value="python.py">Python</option>
           <option value="rust.rs">Rust</option>
-          <option  value="scala.scala">Scala</option>
           <option value="sql.sql">SQL</option>
-          <option value="toml.toml">TOML</option>
           <option value="tsx.tsx">TSX</option>
           <option selected="selected" value="typescript.ts">TypeScript</option>
           <option value="yaml.yaml">YAML</option>
@@ -64,11 +55,27 @@
         "codemirror": "https://esm.sh/codemirror@6.0",
         "@codemirror/view": "https://esm.sh/@codemirror/view@6",
         "@codemirror/state": "https://esm.sh/@codemirror/state@6",
-        "@codemirror/lang-javascript": "https://esm.sh/@codemirror/lang-javascript@6",
         "@codemirror/language": "https://esm.sh/@codemirror/language@6",
         "@lezer/highlight": "https://esm.sh/@lezer/highlight",
         "@catppuccin/palette": "https://esm.sh/@catppuccin/palette@1.7.1",
-        "@catppuccin/codemirror": "./index.js"
+        "@catppuccin/codemirror": "./index.js",
+
+        "@codemirror/lang-javascript": "https://esm.sh/@codemirror/lang-javascript@6",
+        "@codemirror/lang-css": "https://esm.sh/@codemirror/lang-css@6",
+        "@codemirror/lang-html": "https://esm.sh/@codemirror/lang-html@6",
+        "@codemirror/lang-json": "https://esm.sh/@codemirror/lang-json@6",
+        "@codemirror/lang-markdown": "https://esm.sh/@codemirror/lang-markdown@6",
+        "@codemirror/lang-python": "https://esm.sh/@codemirror/lang-python@6",
+        "@codemirror/lang-rust": "https://esm.sh/@codemirror/lang-rust@6",
+        "@codemirror/lang-cpp": "https://esm.sh/@codemirror/lang-cpp@6",
+        "@codemirror/lang-java": "https://esm.sh/@codemirror/lang-java@6",
+        "@codemirror/lang-php": "https://esm.sh/@codemirror/lang-php@6",
+        "@codemirror/lang-sql": "https://esm.sh/@codemirror/lang-sql@6",
+        "@codemirror/lang-go": "https://esm.sh/@codemirror/lang-go@6",
+        "@codemirror/lang-yaml": "https://esm.sh/@codemirror/lang-yaml@6",
+
+        "@replit/codemirror-lang-csharp": "https://esm.sh/@replit/codemirror-lang-csharp@6",
+        "@replit/codemirror-lang-nix": "https://esm.sh/@replit/codemirror-lang-nix@6"
       }
     }
   </script>

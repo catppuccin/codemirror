@@ -1,6 +1,20 @@
 import { EditorView, basicSetup } from "codemirror";
-import { javascript } from "@codemirror/lang-javascript";
 import { Compartment, EditorState } from "@codemirror/state";
+import { javascript } from "@codemirror/lang-javascript";
+import { css } from "@codemirror/lang-css";
+import { html } from "@codemirror/lang-html";
+import { json } from "@codemirror/lang-json";
+import { markdown } from "@codemirror/lang-markdown";
+import { python } from "@codemirror/lang-python";
+import { rust } from "@codemirror/lang-rust";
+import { cpp } from "@codemirror/lang-cpp";
+import { java } from "@codemirror/lang-java";
+import { php } from "@codemirror/lang-php";
+import { sql } from "@codemirror/lang-sql";
+import { go } from "@codemirror/lang-go";
+import { yaml } from "@codemirror/lang-yaml";
+import { csharp } from "@replit/codemirror-lang-csharp";
+import { nix } from "@replit/codemirror-lang-nix";
 import { flavors } from "@catppuccin/palette";
 import {
   catppuccinLatte,
@@ -9,42 +23,38 @@ import {
   catppuccinMocha,
 } from "@catppuccin/codemirror";
 
-const defaultDoc = `/**
- * Constructor for <code>AjaxRequest</code> class
- * @param url the url for the request<p/>
- */
-function AjaxRequest(url) {
-    var urls = ['www.cnn.com', 5, globalVar]
-    this.request = new XMLHttpRequest()
-    url = url.replace(/^\s*(.*)/, '$1') // skip leading whitespace
-    /* check the url to be in urls */
-    var a = '\u1111z\u11ac'
-    this.foo = new (function () {})()
-    let a = true && false
-    foo()
-    // #
-    console.log('abc)
-}
-
-typeof 'nice'
-new Class()
-class NameClass {}
-foo({ abc: 'abcde', "efg": 2 })
-foo.bar({ foo: 'abc' })
-obj.abc = function () {}
-
-;async () => {
-    await Promise.resolve()
-}`;
-
+const samplesUrl =
+  "https://raw.githubusercontent.com/catppuccin/catppuccin/refs/heads/main/samples";
 const themeConfig = new Compartment();
+const langConfig = new Compartment();
+
+const languageProviders = {
+  "cpp.cpp": cpp(),
+  "cs.cs": csharp(),
+  "css.css": css(),
+  "go.go": go(),
+  "html.html": html(),
+  "java.java": java(),
+  "javascript.js": javascript(),
+  "json.json": json(),
+  "jsx.jsx": javascript({ jsx: true }),
+  "markdown.md": markdown(),
+  "nix.nix": nix(),
+  "php.php": php(),
+  "python.py": python(),
+  "rust.rs": rust(),
+  "sql.sql": sql(),
+  "tsx.tsx": javascript({ typescript: true, jsx: true }),
+  "typescript.ts": javascript({ typescript: true }),
+  "yaml.yaml": yaml(),
+};
 
 const editor = new EditorView({
-  doc: defaultDoc,
+  doc: "",
   parent: document.getElementById("code"),
   extensions: [
     basicSetup,
-    javascript({ typescript: true }),
+    langConfig.of(javascript({ typescript: true })),
     EditorState.readOnly.of(true),
     EditorView.editable.of(false),
     EditorView.contentAttributes.of({ tabindex: "0" }),
@@ -59,7 +69,7 @@ const themes = {
   latte: catppuccinLatte,
 };
 
-const input = document.getElementById("select");
+const input = document.getElementById("flavor-select");
 const selectTheme = () => {
   const theme = input.options[input.selectedIndex].value;
 
@@ -80,12 +90,11 @@ input.addEventListener("change", selectTheme);
 const defaultTheme = location.hash.slice(1);
 if (themes[defaultTheme]) input.value = defaultTheme;
 
-selectTheme();
-
-const languageSelector = document.getElementById("language");
+const languageSelector = document.getElementById("language-select");
 const selectLanguage = () => {
   const languageFile = languageSelector.value;
-  fetch("https://raw.githubusercontent.com/catppuccin/catppuccin/refs/heads/main/samples/" + languageFile)
+  const languageProvider = languageProviders[languageFile] ?? javascript();
+  fetch(`${samplesUrl}/${languageFile}`)
     .then((response) => response.text())
     .then((text) => {
       editor.dispatch({
@@ -94,7 +103,11 @@ const selectLanguage = () => {
           to: editor.state.doc.length,
           insert: text,
         },
+        effects: langConfig.reconfigure(languageProvider),
       });
     });
 };
 languageSelector.addEventListener("change", selectLanguage);
+
+selectTheme();
+selectLanguage();
