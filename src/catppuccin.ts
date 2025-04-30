@@ -99,7 +99,6 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
         t.definition(t.name),
         t.deleted,
         t.character,
-        t.propertyName,
         t.macroName,
       ],
       color: colors.text.hex,
@@ -108,6 +107,7 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
       tag: [
         t.function(t.variableName),
         t.function(t.propertyName),
+        t.propertyName,
         t.labelName,
       ],
       color: colors.blue.hex,
