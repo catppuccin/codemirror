@@ -14,16 +14,19 @@ a {
 }
 
 .titlebar {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 5px;
+  padding: 10px;
   background: var(--crust);
-  padding: 5px 10px;
-  margin-bottom: -1px;
+
   select {
     background-color: transparent;
     outline: none;
     color: var(--text);
 
-    padding: 0;
-    border: 0.4rem solid;
+    border: 0.25rem solid;
     border-color: transparent;
     border-radius: 1rem;
 
@@ -32,6 +35,10 @@ a {
       border-color: var(--surface0);
     }
   }
+}
+
+#code {
+  font-size: 1.25rem;
 }
 
 .dot {
