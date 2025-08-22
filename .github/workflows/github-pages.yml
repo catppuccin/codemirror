@@ -23,7 +23,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: cp dist/index.js demo
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: "demo/"
 
