@@ -1,0 +1,189 @@
+---
+whiskers:
+  version: ^2.5.1
+  matrix:
+    - flavor
+    - accent
+  filename: themes/{{ flavor.identifier }}/codemirror-{{ flavor.identifier }}-{{ accent }}.css
+  hex_format: "#{{r}}{{g}}{{b}}"
+---
+.cm-editor {
+  color: {{ text.hex }};
+  background-color: {{ base.hex }};
+
+  .cm-content {
+    caret-color: {{ colors[accent].hex }};
+  }
+
+  .cm-cursor,
+  .cm-dropCursor {
+    border-left-color: {{ colors[accent].hex }};
+  }
+
+  &.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground,
+  .cm-selectionBackground,
+  .cm-content ::selection:
+  {
+    background-color: {{ overlay2.hex }}4d;
+  }
+
+  .cm-panels {
+    background-color: {{ mantle.hex }};
+    color: {{ text.hex }};
+  }
+
+  .cm-panels.cm-panels-top {
+    border-bottom: 2px solid {{ overlay0.hex }};
+  }
+  .cm-panels.cm-panels-bottom {
+    border-top: 2px solid {{ overlay0.hex }};
+  }
+
+  .cm-searchMatch {
+    background-color: {{ colors[accent].hex }}59;
+    outline: 1px solid {{ colors[accent].hex }};
+  }
+
+  .cm-searchMatch.cm-searchMatch-selected {
+    background-color: {{ colors[accent].hex }}2f;
+  }
+
+  .cm-activeLine {
+    background-color: {{ surface0.hex }};
+  }
+
+  .cm-selectionMatch {
+    background-color: {{ surface2.hex }}4d;
+  }
+
+  &.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket {
+    background-color: {{ surface2.hex }}47;
+    color: {{ text.hex }};
+  }
+
+  .cm-gutters {
+    background-color: {{ base.hex }};
+    color: {{ subtext0.hex }};
+    border: none;
+  }
+
+  .cm-activeLineGutter {
+    background-color: {{ surface0.hex }};
+  }
+
+  .cm-foldPlaceholder {
+    background-color: transparent;
+    border: none;
+    color: {{ overlay0.hex }};
+  }
+
+  .cm-tooltip {
+    border: none;
+    background-color: {{ surface0.hex }};
+  }
+
+  .cm-tooltip .cm-tooltip-arrow:before {
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+  }
+
+  .cm-tooltip .cm-tooltip-arrow:after {
+  border-top-color: {{ surface0.hex }};
+  border-bottom-color: {{ surface0.hex }};
+  }
+
+  .cm-tooltip-autocomplete {
+    & > ul > li[aria-selected] {
+      background-color: {{ surface1.hex }};
+      color: {{ text.hex }};
+    }
+  }
+}
+
+dark: {{ flavor.dark }};
+
+  t.keyword {
+    color: {{ mauve.hex }};
+  }
+
+  t.name,
+  t.definition > t.name,
+  t.deleted,
+  t.character,
+  t.macroName {
+    color: {{ text.hex }};
+  }
+
+  t.function > t.variableName,
+  t.function > t.propertyName,
+  t.propertyName,
+  t.labelName {
+    color: {{ blue.hex }};
+  }
+  t.color,
+  t.constant > t.name,
+  t.standard > t.name {
+    color: {{ peach.hex }};
+  }
+
+  t.self, t.atom {
+    color: {{ red.hex }};
+  }
+
+  t.typeName, t.className, t.changed, t.annotation, t.namespace {
+    color: {{ yellow.hex }};
+  }
+
+  t.operator {
+    color: {{ sky.hex }};
+  }
+
+  t.url, t.link {
+    color: {{ teal.hex }};
+  }
+
+  t.escape, t.regexp {
+    color: {{ pink.hex }};
+  }
+
+  t.meta, t.punctuation, t.separator, t.comment {
+    color: {{ overlay2.hex }};
+  }
+
+  t.strong {
+    font-weight: bold;
+  }
+
+  t.emphasis {
+    font-style: italic;
+  }
+
+  t.strikethrough {
+    text-decoration: line-through;
+  }
+
+  t.link {
+    color: {{ blue.hex }};
+    text-decoration: underline;
+  }
+
+  t.heading {
+    font-weight: bold;
+    color: {{ blue.hex }};
+  }
+
+  t.special t.variableName {
+    color: {{ lavender.hex }};
+  }
+
+  t.bool, t.number {
+    color: {{ peach.hex }};
+  }
+
+  t.processingInstruction, t.string, t.inserted {
+    color: {{ green.hex }};
+  }
+  t.invalid {
+    color: {{ red.hex }};
+  }
+}
