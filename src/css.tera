@@ -26,10 +26,9 @@ whiskers:
 }
 .CodeMirror-activeline .CodeMirror-linenumber {
   color: {{ lavender.hex }};
-  background-color: {{ overlay2.hex }}4d;
 }
 .CodeMirror-activeline-background {
-  background-color: {{ overlay2.hex }}4d;
+  background-color: {{ surface0.hex }};
 }
 .CodeMirror-line
 .CodeMirror-guttermarker {
@@ -134,7 +133,11 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 .CodeMirror-focused .CodeMirror-selected {
   background-color: {{ flavor.colors[accent] | sub(lightness=10) | get(key="hex") }}33;
 }
-.cm-searching {
+body.find-open .cm-searching {
+  color: {{ flavor.colors[accent].hex }};
+  background-color: {{ flavor.colors[accent].hex }}33;
+}
+body.find-open .cm-searching.search-target-match {
   color: {{ flavor.colors[accent].hex }};
   background-color: {{ flavor.colors[accent] | sub(lightness=10) | get(key="hex") }}33;
 }
@@ -180,7 +183,7 @@ li.CodeMirror-hint-active {
 }
 .CodeMirror-selection-highlight-scrollbar,
 .cm-matchhighlight {
-  background-color: {{ flavor.colors[accent].hex }}66;
+  background-color: {{ overlay2.hex }}4d;
 }
 .gutter-bookmark {
   color: {{ flavor.colors[accent] | sub(lightness=10) | get(key="hex") }};

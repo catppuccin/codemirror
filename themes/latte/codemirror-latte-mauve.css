@@ -17,10 +17,9 @@
 }
 .CodeMirror-activeline .CodeMirror-linenumber {
   color: #7287fd;
-  background-color: #7c7f934d;
 }
 .CodeMirror-activeline-background {
-  background-color: #7c7f934d;
+  background-color: #ccd0da;
 }
 .CodeMirror-line
 .CodeMirror-guttermarker {
@@ -125,7 +124,11 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 .CodeMirror-focused .CodeMirror-selected {
   background-color: #6c12e233;
 }
-.cm-searching {
+body.find-open .cm-searching {
+  color: #8839ef;
+  background-color: #8839ef33;
+}
+body.find-open .cm-searching.search-target-match {
   color: #8839ef;
   background-color: #6c12e233;
 }
@@ -171,7 +174,7 @@ li.CodeMirror-hint-active {
 }
 .CodeMirror-selection-highlight-scrollbar,
 .cm-matchhighlight {
-  background-color: #8839ef66;
+  background-color: #7c7f934d;
 }
 .gutter-bookmark {
   color: #6c12e2;
