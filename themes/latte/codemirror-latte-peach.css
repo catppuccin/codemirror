@@ -1,0 +1,179 @@
+.CodeMirror {
+  color: #eff1f5;
+}
+.CodeMirror-line span {
+  color: #4c4f69;
+}
+.CodeMirror-gutter-filler,
+.CodeMirror-scrollbar-filler {
+  background-color: #7c7f934d;
+}
+.CodeMirror-gutters {
+  background-color: #e6e9ef;
+  border-right-color: #9ca0b0;
+}
+.CodeMirror-linenumber {
+  color: #8c8fa1;
+}
+.CodeMirror-activeline .CodeMirror-linenumber {
+  color: #7287fd;
+  background-color: #7c7f934d;
+}
+.CodeMirror-activeline-background {
+  background-color: #7c7f934d;
+}
+.CodeMirror-line
+.CodeMirror-guttermarker {
+  color: #8c8fa1;
+}
+.CodeMirror-guttermarker-subtle {
+  color: #9ca0b0;
+}
+.CodeMirror-cursor {
+  border-left-color: #fe640b;
+}
+.CodeMirror div.CodeMirror-secondarycursor {
+  border-left-color: #fe640b;
+}
+.cm-fat-cursor .CodeMirror-cursor {
+  background-color: #fe640b;
+}
+.cm-s-default .cm-header {
+  color: #fe640b
+}
+.cm-s-default .cm-quote {
+  color: #5c5f77;
+}
+.cm-negative {
+  color: #d20f39;
+}
+.cm-positive {
+  color: #40a02b;
+}
+.cm-s-default .cm-keyword {
+  color: #8839ef;
+}
+.cm-s-default .cm-atom {
+  color: #d20f39;
+}
+.cm-s-default .cm-number {
+  color: #fe640b;
+}
+.cm-s-default .cm-def {
+  color: #8839ef;
+}
+.cm-s-default .cm-property {
+  color: #1e66f5;
+}
+.cm-s-default .cm-variable {
+  color: #1e66f5;
+}
+.cm-s-default .cm-variable-2 {
+  color: #1e66f5;
+}
+.cm-s-default .cm-type,
+.cm-s-default .cm-variable-3 {
+  color: #179299;
+}
+.cm-s-default .cm-comment {
+  color: #6c6f85;
+}
+.cm-s-default .cm-string {
+  color: #40a02b;
+}
+.cm-s-default .cm-string-2 {
+  color: red;
+}
+.cm-s-default .cm-meta,
+.cm-s-default .cm-qualifier {
+  color: #df8e1d;
+}
+.cm-s-default .cm-builtin {
+  color: #d20f39;
+}
+.cm-s-default .cm-bracket {
+  color: #5c5f77;
+}
+.cm-s-default .cm-tag {
+  color: #1e66f5;
+}
+.cm-s-default .cm-attribute {
+  color: #df8e1d;
+}
+.cm-s-default .cm-hr {
+  color: #fe640b
+}
+.cm-s-default .cm-link {
+  color: #1e66f5;
+}
+.cm-invalidchar,
+.cm-s-default .cm-error {
+  color: #d20f39;
+}
+div.CodeMirror span.CodeMirror-matchingbracket {
+  color: #40a02b;
+}
+div.CodeMirror span.CodeMirror-nonmatchingbracket {
+  color: #d20f39;
+}
+.CodeMirror-matchingtag {
+  background-color: #04a5e5;
+}
+.CodeMirror-selected {
+  background-color: #fe640b33;
+}
+.CodeMirror-focused .CodeMirror-selected {
+  background-color: #d54f0133;
+}
+.cm-searching {
+  color: #fe640b;
+  background-color: #d54f0133;
+}
+.CodeMirror-dialog-top {
+  border-bottom-color: #9ca0b0;
+}
+.CodeMirror-dialog-bottom {
+  border-top-color: #9ca0b0;
+}
+.CodeMirror-foldmarker {
+  color: #5c5f77;
+}
+.CodeMirror-hints {
+  background-color: #ccd0da;
+}
+.CodeMirror-hint {
+  color: #5c5f77;
+}
+.CodeMirror-hint:hover {
+  background-color: #bcc0cc4d;
+}
+li.CodeMirror-hint-active {
+  background-color: #acb0be4d;
+}
+.CodeMirror-lint-tooltip {
+  color: #179299;
+  background-color: #1792994d;
+}
+.CodeMirror-lint-line-error {
+  color: #d20f39;
+  background-color: #d20f394d;
+}
+.CodeMirror-lint-line-warning {
+  color: #fe640b;
+  background-color: #fe640b4d;
+}
+.CodeMirror-search-match {
+  background-color: #fe640b4d;
+  border-color: #fe640b;
+}
+.CodeMirror-activeline .applies-to:before {
+  background-color: transparent;
+}
+.CodeMirror-selection-highlight-scrollbar,
+.cm-matchhighlight {
+  background-color: #fe640b66;
+}
+.gutter-bookmark {
+  color: #d54f01;
+  background-color: #d54f014d;
+}
