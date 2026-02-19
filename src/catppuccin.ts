@@ -70,7 +70,7 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
       },
 
       ".cm-placeholder": {
-        color: colors.subtext0.hex,
+        color: colors.overlay1.hex,
       },
 
       ".cm-tooltip": {
