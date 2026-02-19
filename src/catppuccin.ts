@@ -25,7 +25,7 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
 
       "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
         {
-          backgroundColor: colors.surface2.hex,
+          backgroundColor: `${colors.overlay2.hex}40`
         },
 
       ".cm-panels": {
