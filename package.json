@@ -45,14 +45,14 @@
   "module": "dist/index.js",
   "dependencies": {
     "@catppuccin/palette": "^1.7.1",
-    "@codemirror/language": "^6.0.0",
-    "@codemirror/state": "^6.0.0",
-    "@codemirror/view": "^6.0.0",
-    "@lezer/highlight": "^1.0.0"
+    "@codemirror/language": "^6.12.1",
+    "@codemirror/state": "^6.5.4",
+    "@codemirror/view": "^6.39.15",
+    "@lezer/highlight": "^1.2.3"
   },
   "devDependencies": {
     "@codemirror/buildhelper": "^1.0.0",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.14"
   },
-  "packageManager": "pnpm@10.10.0"
+  "packageManager": "pnpm@10.30.1"
 }
