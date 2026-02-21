@@ -69,6 +69,10 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
         color: colors.overlay0.hex,
       },
 
+      ".cm-placeholder": {
+        color: colors.overlay1.hex,
+      },
+
       ".cm-tooltip": {
         border: "none",
         backgroundColor: colors.surface0.hex,
