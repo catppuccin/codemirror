@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/catppuccin/codemirror/compare/v1.0.2...v1.0.3) (2026-02-21)
+
+
+### Bug Fixes
+
+* ci & update deps ([#32](https://github.com/catppuccin/codemirror/issues/32)) ([a63db60](https://github.com/catppuccin/codemirror/commit/a63db6008de5dacc71ba593384898930ab90aefd))
+
 ## [1.0.2](https://github.com/catppuccin/codemirror/compare/v1.0.1...v1.0.2) (2026-02-21)
 
 
