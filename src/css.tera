@@ -1,0 +1,191 @@
+---
+whiskers:
+  version: ^2.5.1
+  matrix:
+    - flavor
+    - accent
+  filename: themes/{{ flavor.identifier }}/codemirror-{{ flavor.identifier }}-{{ accent }}.css
+  hex_format: "#{{r}}{{g}}{{b}}"
+---
+.CodeMirror {
+  color: {{ base.hex }};
+}
+.CodeMirror-line span {
+  color: {{ text.hex }};
+}
+.CodeMirror-gutter-filler,
+.CodeMirror-scrollbar-filler {
+  background-color: {{ overlay2.hex }}4d;
+}
+.CodeMirror-gutters {
+  background-color: {{ mantle.hex }};
+  border-right-color: {{ overlay0.hex }};
+}
+.CodeMirror-linenumber {
+  color: {{ overlay1.hex }};
+}
+.CodeMirror-activeline .CodeMirror-linenumber {
+  color: {{ lavender.hex }};
+}
+.CodeMirror-activeline-background {
+  background-color: {{ surface0.hex }};
+}
+.CodeMirror-line
+.CodeMirror-guttermarker {
+  color: {{ overlay1.hex }};
+}
+.CodeMirror-guttermarker-subtle {
+  color: {{ overlay0.hex }};
+}
+.CodeMirror-cursor {
+  border-left-color: {{ flavor.colors[accent].hex }};
+}
+.CodeMirror div.CodeMirror-secondarycursor {
+  border-left-color: {{ flavor.colors[accent].hex }};
+}
+.cm-fat-cursor .CodeMirror-cursor {
+  background-color: {{ flavor.colors[accent].hex }};
+}
+.cm-s-default .cm-header {
+  color: {{ flavor.colors[accent].hex }}
+}
+.cm-s-default .cm-quote {
+  color: {{ subtext1.hex }};
+}
+.cm-negative {
+  color: {{ red.hex }};
+}
+.cm-positive {
+  color: {{ green.hex }};
+}
+.cm-s-default .cm-keyword {
+  color: {{ mauve.hex }};
+}
+.cm-s-default .cm-atom {
+  color: {{ red.hex }};
+}
+.cm-s-default .cm-number {
+  color: {{ peach.hex }};
+}
+.cm-s-default .cm-def {
+  color: {{ mauve.hex }};
+}
+.cm-s-default .cm-property {
+  color: {{ blue.hex }};
+}
+.cm-s-default .cm-variable {
+  color: {{ blue.hex }};
+}
+.cm-s-default .cm-variable-2 {
+  color: {{ blue.hex }};
+}
+.cm-s-default .cm-type,
+.cm-s-default .cm-variable-3 {
+  color: {{ teal.hex }};
+}
+.cm-s-default .cm-comment {
+  color: {{ subtext0.hex }};
+}
+.cm-s-default .cm-string {
+  color: {{ green.hex }};
+}
+.cm-s-default .cm-string-2 {
+  color: red;
+}
+.cm-s-default .cm-meta,
+.cm-s-default .cm-qualifier {
+  color: {{ yellow.hex }};
+}
+.cm-s-default .cm-builtin {
+  color: {{ red.hex }};
+}
+.cm-s-default .cm-bracket {
+  color: {{ subtext1.hex }};
+}
+.cm-s-default .cm-tag {
+  color: {{ blue.hex }};
+}
+.cm-s-default .cm-attribute {
+  color: {{ yellow.hex }};
+}
+.cm-s-default .cm-hr {
+  color: {{ flavor.colors[accent].hex }}
+}
+.cm-s-default .cm-link {
+  color: {{ blue.hex }};
+}
+.cm-invalidchar,
+.cm-s-default .cm-error {
+  color: {{ red.hex }};
+}
+div.CodeMirror span.CodeMirror-matchingbracket {
+  color: {{ green.hex }};
+}
+div.CodeMirror span.CodeMirror-nonmatchingbracket {
+  color: {{ red.hex }};
+}
+.CodeMirror-matchingtag {
+  background-color: {{ sky.hex }};
+}
+.CodeMirror-selected {
+  background-color: {{ flavor.colors[accent].hex }}33;
+}
+.CodeMirror-focused .CodeMirror-selected {
+  background-color: {{ flavor.colors[accent] | sub(lightness=10) | get(key="hex") }}33;
+}
+body.find-open .cm-searching {
+  color: {{ flavor.colors[accent].hex }};
+  background-color: {{ flavor.colors[accent].hex }}33;
+}
+body.find-open .cm-searching.search-target-match {
+  color: {{ flavor.colors[accent].hex }};
+  background-color: {{ flavor.colors[accent] | sub(lightness=10) | get(key="hex") }}33;
+}
+.CodeMirror-dialog-top {
+  border-bottom-color: {{ overlay0.hex }};
+}
+.CodeMirror-dialog-bottom {
+  border-top-color: {{ overlay0.hex }};
+}
+.CodeMirror-foldmarker {
+  color: {{ subtext1.hex }};
+}
+.CodeMirror-hints {
+  background-color: {{ surface0.hex }};
+}
+.CodeMirror-hint {
+  color: {{ subtext1.hex }};
+}
+.CodeMirror-hint:hover {
+  background-color: {{ surface1.hex }}4d;
+}
+li.CodeMirror-hint-active {
+  background-color: {{ surface2.hex }}4d;
+}
+.CodeMirror-lint-tooltip {
+  color: {{ teal.hex }};
+  background-color: {{ teal.hex }}4d;
+}
+.CodeMirror-lint-line-error {
+  color: {{ red.hex }};
+  background-color: {{ red.hex }}4d;
+}
+.CodeMirror-lint-line-warning {
+  color: {{ peach.hex }};
+  background-color: {{ peach.hex }}4d;
+}
+.CodeMirror-search-match {
+  background-color: {{ flavor.colors[accent].hex }}4d;
+  border-color: {{ flavor.colors[accent].hex }};
+}
+.CodeMirror-activeline .applies-to:before {
+  background-color: transparent;
+}
+.CodeMirror-selection-highlight-scrollbar,
+.cm-matchhighlight {
+  background-color: {{ overlay2.hex }}4d;
+}
+.gutter-bookmark {
+  color: {{ flavor.colors[accent] | sub(lightness=10) | get(key="hex") }};
+  background-color: {{ flavor.colors[accent] | sub(lightness=10) | get(key="hex") }}4d;
+}
