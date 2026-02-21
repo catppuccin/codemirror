@@ -1,6 +1,6 @@
 {
   "name": "@catppuccin/codemirror",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "license": "MIT",
   "description": "Soothing pastel theme for CodeMirror",
