@@ -1,0 +1,191 @@
+// CM6 Lib
+// N.B. Import this at the top of your #catppuccin macro.
+
+// Generic Classes
+
+@import "https://userstyles.catppuccin.com/lib/lib.less";
+
+#lib.palette();
+
+.cm-editor {
+  color: @text;
+  background-color: @base;
+}
+
+.cm-scroller {
+  background-color: @base;
+}
+
+.cm-content {
+  color: @text;
+}
+
+.cm-gutters {
+  background-color: @mantle;
+  border-right-color: @overlay0;
+}
+
+.cm-gutter {
+  background-color: @mantle;
+}
+
+.cm-gutterElement {
+  color: @overlay1;
+}
+
+.cm-lineNumbers .cm-gutterElement {
+  color: @overlay1;
+}
+
+.cm-activeLineGutter {
+  color: @lavender;
+  background-color: fade(@surface0, 30%);
+}
+
+.cm-activeLine {
+  background-color: fade(@surface0, 30%);
+}
+
+.cm-cursor,
+.cm-dropCursor {
+  border-left-color: @accent;
+}
+
+.cm-focused > .cm-scroller > .cm-cursorLayer .cm-cursor {
+  border-left-color: @accent;
+}
+
+.cm-selectionBackground {
+  background-color: fade(@accent, 20%);
+}
+
+.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground {
+  background-color: fade(@accent, 20%);
+}
+
+.cm-matchingBracket {
+  background-color: fade(@green, 30%);
+}
+
+.cm-nonmatchingBracket {
+  background-color: fade(@red, 30%);
+}
+
+.cm-searchMatch {
+  background-color: fade(@yellow, 30%);
+}
+
+.cm-panels {
+  background-color: @surface0;
+  border-color: @overlay0;
+}
+
+.cm-panels-top {
+  border-bottom-color: @overlay0;
+}
+
+.cm-panels-bottom {
+  border-top-color: @overlay0;
+}
+
+.cm-tooltip {
+  background-color: @surface1;
+  border-color: @overlay0;
+  color: @text;
+}
+
+.cm-tooltip-autocomplete ul li[aria-selected] {
+  background-color: fade(@surface2, 30%);
+}
+
+.cm-tooltip-autocomplete ul li:hover {
+  background-color: fade(@surface1, 30%);
+}
+
+.cm-foldPlaceholder {
+  background-color: fade(@surface1, 30%);
+  border-color: @overlay0;
+  color: @subtext1;
+}
+
+.cm-foldGutter span {
+  color: @overlay1;
+}
+
+.cm-highlightSpace::before {
+  color: fade(@overlay1, 30%);
+}
+
+.cm-trailingSpace {
+  background-color: fade(@red, 30%);
+}
+
+// Syntax Highlighting
+
+.ͼ5 {
+  color: @rosewater; // Macros
+}
+
+.ͼb {
+  color: @mauve; // Keywords
+}
+
+.ͼc {
+  color: @peach; // Booleans, Language Directives
+}
+
+.ͼd {
+  color: @peach; // Constants, Numbers
+}
+
+.ͼe {
+  color: @green; // Strings
+}
+
+.ͼf {
+  color: @pink; // Escape Sequences, RegEx
+}
+
+.ͼg {
+  color: @blue; // Methods, Functions, Variables
+}
+
+.ͼi {
+  color: @yellow; // Classes, Interfaces, Annotations, Metadata, Enums, Types
+}
+
+.ͼj {
+  color: @yellow; // Constructors
+}
+
+.ͼl {
+  color: @peach; // Member Attributes
+}
+
+.ͼk {
+  color: red; // TODO: unknown!
+}
+
+.ͼm {
+  color: @overlay2; // comments
+}
+
+.ͼn {
+  color: blue; // TODO: unknown!
+}
+
+.ͼ6 {
+  color: @blue; // link
+
+  &.ͼc {
+    color: @green;
+  }
+}
+
+// .ͼ1: editor
+// .ͼ2: content
+// .ͼ3: something content/selection related
+// .ͼ4: selection
+// .ͼ7: underline
+// .ͼ8: italic
+// .ͼ9: bold

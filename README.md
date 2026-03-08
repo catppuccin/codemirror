@@ -57,12 +57,56 @@
    })
    ```
 
-Check out the [demo](https://codemirror.catppuccin.com) for reference.
+## Userstyles Usage
+
+1. Import the base Catppuccin library first and foremost.
+
+2. Write your `@-moz-document` specifier, write up your `:root` with dark/light
+   theme specifiers.
+
+3. Open the `#catppuccin(@flavor)` macro, and import `#lib.palette()` and
+   `#lib.defaults()`.
+
+4. Import the CM5/6 library with
+   `@import "https://codemirror.catppuccin.com/lib/cm<5/6>.less"`.
+
+5. Final code should look something like:
+
+   ```less
+   /* ==UserStyle==
+   @name ...
+   ==/UserStyle== */
+
+   @import "https://userstyles.catppuccin.com/lib/lib.less";
+
+   @-moz-document domain("...") {
+     :root {
+       &[data-ui-theme="light"] {
+         #catppuccin(@lightFlavor);
+       }
+       &[data-ui-theme="dark"] {
+         #catppuccin(@darkFlavor);
+       }
+     }
+
+     #catppuccin(@flavor) {
+       #lib.palette();
+       #lib.defaults();
+
+       @import "https://codemirror.catppuccin.com/lib/cm<5/6>.less";
+
+       // Rest of theme here
+     }
+   }
+   ```
+
+> Check out the [demo](https://codemirror.catppuccin.com) for reference.
 
 ## 🙋 FAQ
 
 - Q: **_Is this compatible with CodeMirror5?_**\
-  A: No, see the [v0.0.1](https://github.com/catppuccin/codemirror/tree/v0.0.1) tag for CodeMirror5 support.
+  A: No, see the [v0.0.1](https://github.com/catppuccin/codemirror/tree/v0.0.1)
+  tag for CodeMirror5 support.
 
 ## 💝 Thanks to
 
@@ -76,8 +120,10 @@ This repository currently has no maintainers.
 
 **Inspiration and Contribution**
 
-- [marijnh](https://github.com/marijnh) for [CodeMirror](https://github.com/codemirror/codemirror5)
-- [ghostx31](https://github.com/ghostx31/) for [catppuccin/joplin](https://github.com/catppuccin/joplin)
+- [marijnh](https://github.com/marijnh) for
+  [CodeMirror](https://github.com/codemirror/codemirror5)
+- [ghostx31](https://github.com/ghostx31/) for
+  [catppuccin/joplin](https://github.com/catppuccin/joplin)
 - [BuonOmo](https://github.com/BuonOmo) for CodeMirror v6 support
 
 &nbsp;
