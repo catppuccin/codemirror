@@ -31,7 +31,8 @@
   "scripts": {
     "prepare": "pnpm run build",
     "build": "cm-buildhelper src/catppuccin.ts",
-    "watch": "nodemon --watch src -e ts --exec 'pnpm build'"
+    "watch": "nodemon --watch src -e ts --exec 'pnpm build'",
+    "write-less": "npx tsx src/less.ts > src/cm6map.less"
   },
   "files": [
     "dist"
@@ -52,7 +53,9 @@
   },
   "devDependencies": {
     "@codemirror/buildhelper": "^1.0.0",
-    "nodemon": "^3.1.10"
+    "@types/node": "^25.3.5",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2"
   },
   "packageManager": "pnpm@10.10.0"
 }
