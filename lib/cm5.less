@@ -1,182 +1,239 @@
+// CM5 Lib
+// N.B. Import this BELOW #lib.palette(), but ABOVE the rest of your style.
+
 .CodeMirror {
-  color: #24273a;
+  color: @base;
 }
+
 .CodeMirror-line span {
-  color: #cad3f5;
+  color: @text;
 }
+
 .CodeMirror-gutter-filler,
 .CodeMirror-scrollbar-filler {
-  background-color: #939ab74d;
+  background-color: fade(@overlay2, 30%);
 }
+
 .CodeMirror-gutters {
-  background-color: #1e2030;
-  border-right-color: #6e738d;
+  background-color: @mantle;
+  border-right-color: @overlay0;
 }
+
 .CodeMirror-linenumber {
-  color: #8087a2;
+  color: @overlay1;
 }
+
 .CodeMirror-activeline .CodeMirror-linenumber {
-  color: #b7bdf8;
+  color: @lavender;
 }
+
 .CodeMirror-activeline-background {
-  background-color: #363a4f;
+  background-color: @surface0;
 }
-.CodeMirror-line
-.CodeMirror-guttermarker {
-  color: #8087a2;
+
+.CodeMirror-line .CodeMirror-guttermarker {
+  color: @overlay1;
 }
+
 .CodeMirror-guttermarker-subtle {
-  color: #6e738d;
+  color: @overlay0;
 }
+
 .CodeMirror-cursor {
-  border-left-color: #eed49f;
+  border-left-color: @accent;
 }
+
 .CodeMirror div.CodeMirror-secondarycursor {
-  border-left-color: #eed49f;
+  border-left-color: @accent;
 }
+
 .cm-fat-cursor .CodeMirror-cursor {
-  background-color: #eed49f;
+  background-color: @accent;
 }
+
 .cm-s-default .cm-header {
-  color: #eed49f
+  color: @accent;
 }
+
 .cm-s-default .cm-quote {
-  color: #b8c0e0;
+  color: @subtext1;
 }
+
 .cm-negative {
-  color: #ed8796;
+  color: @red;
 }
+
 .cm-positive {
-  color: #a6da95;
+  color: @green;
 }
+
 .cm-s-default .cm-keyword {
-  color: #c6a0f6;
+  color: @mauve;
 }
+
 .cm-s-default .cm-atom {
-  color: #ed8796;
+  color: @red;
 }
+
 .cm-s-default .cm-number {
-  color: #f5a97f;
+  color: @peach;
 }
+
 .cm-s-default .cm-def {
-  color: #c6a0f6;
+  color: @mauve;
 }
+
 .cm-s-default .cm-property {
-  color: #8aadf4;
+  color: @blue;
 }
+
 .cm-s-default .cm-variable {
-  color: #8aadf4;
+  color: @blue;
 }
+
 .cm-s-default .cm-variable-2 {
-  color: #8aadf4;
+  color: @blue;
 }
+
 .cm-s-default .cm-type,
 .cm-s-default .cm-variable-3 {
-  color: #8bd5ca;
+  color: @teal;
 }
+
 .cm-s-default .cm-comment {
-  color: #a5adcb;
+  color: @subtext0;
 }
+
 .cm-s-default .cm-string {
-  color: #a6da95;
+  color: @green;
 }
+
 .cm-s-default .cm-string-2 {
   color: red;
 }
+
 .cm-s-default .cm-meta,
 .cm-s-default .cm-qualifier {
-  color: #eed49f;
+  color: @yellow;
 }
+
 .cm-s-default .cm-builtin {
-  color: #ed8796;
+  color: @red;
 }
+
 .cm-s-default .cm-bracket {
-  color: #b8c0e0;
+  color: @subtext1;
 }
+
 .cm-s-default .cm-tag {
-  color: #8aadf4;
+  color: @blue;
 }
+
 .cm-s-default .cm-attribute {
-  color: #eed49f;
+  color: @yellow;
 }
+
 .cm-s-default .cm-hr {
-  color: #eed49f
+  color: @accent;
 }
+
 .cm-s-default .cm-link {
-  color: #8aadf4;
+  color: @blue;
 }
+
 .cm-invalidchar,
 .cm-s-default .cm-error {
-  color: #ed8796;
+  color: @red;
 }
+
 div.CodeMirror span.CodeMirror-matchingbracket {
-  color: #a6da95;
+  color: @green;
 }
+
 div.CodeMirror span.CodeMirror-nonmatchingbracket {
-  color: #ed8796;
+  color: @red;
 }
+
 .CodeMirror-matchingtag {
-  background-color: #91d7e3;
+  background-color: @sky;
 }
+
 .CodeMirror-selected {
-  background-color: #eed49f33;
+  background-color: fade(@accent, 20%);
 }
+
 .CodeMirror-focused .CodeMirror-selected {
-  background-color: #e6c07433;
+  background-color: fade(darken(@accent, 10%), 20%);
 }
+
 body.find-open .cm-searching {
-  color: #eed49f;
-  background-color: #eed49f33;
+  color: @accent;
+  background-color: fade(@accent, 20%);
 }
+
 body.find-open .cm-searching.search-target-match {
-  color: #eed49f;
-  background-color: #e6c07433;
+  color: @accent;
+  background-color: fade(darken(@accent, 10%), 20%);
 }
+
 .CodeMirror-dialog-top {
-  border-bottom-color: #6e738d;
+  border-bottom-color: @overlay0;
 }
+
 .CodeMirror-dialog-bottom {
-  border-top-color: #6e738d;
+  border-top-color: @overlay0;
 }
+
 .CodeMirror-foldmarker {
-  color: #b8c0e0;
+  color: @subtext1;
 }
+
 .CodeMirror-hints {
-  background-color: #363a4f;
+  background-color: @surface0;
 }
+
 .CodeMirror-hint {
-  color: #b8c0e0;
+  color: @subtext1;
 }
+
 .CodeMirror-hint:hover {
-  background-color: #494d644d;
+  background-color: fade(@surface1, 30%);
 }
+
 li.CodeMirror-hint-active {
-  background-color: #5b60784d;
+  background-color: fade(@surface2, 30%);
 }
+
 .CodeMirror-lint-tooltip {
-  color: #8bd5ca;
-  background-color: #8bd5ca4d;
+  color: @teal;
+  background-color: fade(@teal, 30%);
 }
+
 .CodeMirror-lint-line-error {
-  color: #ed8796;
-  background-color: #ed87964d;
+  color: @red;
+  background-color: fade(@red, 30%);
 }
+
 .CodeMirror-lint-line-warning {
-  color: #f5a97f;
-  background-color: #f5a97f4d;
+  color: @peach;
+  background-color: fade(@peach, 30%);
 }
+
 .CodeMirror-search-match {
-  background-color: #eed49f4d;
-  border-color: #eed49f;
+  background-color: fade(@accent, 30%);
+  border-color: @accent;
 }
+
 .CodeMirror-activeline .applies-to:before {
   background-color: transparent;
 }
+
 .CodeMirror-selection-highlight-scrollbar,
 .cm-matchhighlight {
-  background-color: #939ab74d;
+  background-color: fade(@overlay2, 30%);
 }
+
 .gutter-bookmark {
-  color: #e6c074;
-  background-color: #e6c0744d;
+  color: darken(@accent, 10%);
+  background-color: fade(darken(@accent, 10%), 30%);
 }
