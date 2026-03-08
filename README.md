@@ -72,34 +72,33 @@
 
 5. Final code should look something like:
 
-  ```less
-  /* ==UserStyle==
-  @name ...
-  ==/UserStyle== */
+   ```less
+   /* ==UserStyle==
+   @name ...
+   ==/UserStyle== */
 
-  @import "https://userstyles.catppuccin.com/lib/lib.less";
+   @import "https://userstyles.catppuccin.com/lib/lib.less";
 
-  @-moz-document url-prefix("moz-extension://"),
-    url-prefix("chrome-extension://") {
-    :root {
-      &[data-ui-theme="light"] {
-        #catppuccin(@lightFlavor);
-      }
-      &[data-ui-theme="dark"] {
-        #catppuccin(@darkFlavor);
-      }
-    }
+   @-moz-document domain("...") {
+     :root {
+       &[data-ui-theme="light"] {
+         #catppuccin(@lightFlavor);
+       }
+       &[data-ui-theme="dark"] {
+         #catppuccin(@darkFlavor);
+       }
+     }
 
-    #catppuccin(@flavor) {
-      #lib.palette();
-      #lib.defaults();
+     #catppuccin(@flavor) {
+       #lib.palette();
+       #lib.defaults();
 
-      @import "https://codemirror.catppuccin.com/lib/cm<5/6>.less";
+       @import "https://codemirror.catppuccin.com/lib/cm<5/6>.less";
 
-      // Rest of theme here
-    }
-  }
-  ```
+       // Rest of theme here
+     }
+   }
+   ```
 
 > Check out the [demo](https://codemirror.catppuccin.com) for reference.
 

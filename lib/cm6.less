@@ -1,7 +1,11 @@
 // CM6 Lib
-// N.B. Import this BELOW #lib.palette(), but ABOVE the rest of your style.
+// N.B. Import this at the top of your #catppuccin macro.
 
 // Generic Classes
+
+@import "https://userstyles.catppuccin.com/lib/lib.less";
+
+#lib.palette();
 
 .cm-editor {
   color: @text;
@@ -118,180 +122,46 @@
 
 // Syntax Highlighting
 
-.ͼg {
-  color: @blue; // function/identifier
+.ͼ5 {
+  color: @rosewater; // Macros
 }
 
 .ͼb {
-  color: @mauve; // keywords
+  color: @mauve; // Keywords
+}
+
+.ͼc {
+  color: @peach; // Boolean Keywords
+}
+
+.ͼd {
+  color: @peach; // Constants, Numbers
 }
 
 .ͼe {
-  color: @green; // strings
+  color: @green; // Strings
 }
 
 .ͼf {
-  color: @pink; // template strings
+  color: @pink; // Escape Sequences, RegEx
 }
-// attributes/properties
-.ͼl {
-  color: @lavender;
+
+.ͼg {
+  color: @blue; // Methods, Functions
 }
-// class instantiation identifier
+
+.ͼi {
+  color: @yellow; // Classes, Interfaces, Annotations, Metadata, Enums, Types
+}
+
 .ͼj {
-  color: @teal;
+  color: @yellow; // Constructors
+}
+
+.ͼl {
+  color: @peach; // Class/Struct Attributes/Properties
 }
 
 .ͼm {
   color: @overlay2; // comments
 }
-
-.ͼd {
-  color: @peach; // numbers
-}
-
-.ͼc {
-  color: @peach; // booleans
-}
-
-
-.ͼ1.cm-focused
-.ͼ1
-.ͼ1 .cm-scroller
-.ͼ1 .cm-content[contenteditable=true]
-.ͼ1 .cm-content
-.ͼ1 .cm-lineWrapping
-.ͼ2 .cm-content
-.ͼ3 .cm-content
-.ͼ1 .cm-line
-.ͼ1 .cm-layer > *
-.ͼ1 .cm-layer
-.ͼ2 .cm-selectionBackground
-.ͼ3 .cm-selectionBackground
-.ͼ2.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground
-.ͼ3.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground
-.ͼ1 .cm-cursorLayer
-.ͼ1.cm-focused > .cm-scroller > .cm-cursorLayer
-@keyframes cm-blink
-@keyframes cm-blink2
-.ͼ1 .cm-cursor, .ͼ1 .cm-dropCursor
-.ͼ1 .cm-cursor
-.ͼ3 .cm-cursor
-.ͼ1 .cm-dropCursor
-.ͼ1.cm-focused > .cm-scroller > .cm-cursorLayer .cm-cursor
-.ͼ1 .cm-iso
-.ͼ1 .cm-announced
-@media print
-.ͼ2 .cm-activeLine
-.ͼ3 .cm-activeLine
-.ͼ2 .cm-specialChar
-.ͼ3 .cm-specialChar
-.ͼ1 .cm-gutters
-.ͼ1 .cm-gutters-before
-.ͼ1 .cm-gutters-after
-.ͼ2 .cm-gutters.cm-gutters-before
-.ͼ2 .cm-gutters.cm-gutters-after
-.ͼ2 .cm-gutters
-.ͼ3 .cm-gutters
-.ͼ1 .cm-gutter
-.ͼ1 .cm-gutterElement
-.ͼ1 .cm-lineNumbers .cm-gutterElement
-.ͼ2 .cm-activeLineGutter
-.ͼ3 .cm-activeLineGutter
-.ͼ1 .cm-panels
-.ͼ2 .cm-panels
-.ͼ2 .cm-panels-top
-.ͼ2 .cm-panels-bottom
-.ͼ3 .cm-panels
-.ͼ1 .cm-dialog label
-.ͼ1 .cm-dialog
-.ͼ1 .cm-dialog-close
-.ͼ1 .cm-tab
-.ͼ1 .cm-widgetBuffer
-.ͼ1 .cm-placeholder
-.ͼ1 .cm-highlightSpace
-.ͼ1 .cm-highlightTab
-.ͼ1 .cm-trailingSpace
-.ͼ1 .cm-button
-.ͼ2 .cm-button:active
-.ͼ2 .cm-button
-.ͼ3 .cm-button:active
-.ͼ3 .cm-button
-.ͼ1 .cm-textfield
-.ͼ2 .cm-textfield
-.ͼ3 .cm-textfield
-.ͼ1 .cm-selectionMatch
-.ͼ1 .cm-searchMatch .cm-selectionMatch
-.ͼ1 .cm-tooltip.cm-tooltip-autocomplete > ul > li, .ͼ1 .cm-tooltip.cm-tooltip-autocomplete > ul > completion-section
-.ͼ1 .cm-tooltip.cm-tooltip-autocomplete > ul > li
-.ͼ1 .cm-tooltip.cm-tooltip-autocomplete > ul > completion-section
-.ͼ1 .cm-tooltip.cm-tooltip-autocomplete > ul
-.ͼ2 .cm-tooltip-autocomplete ul li[aria-selected]
-.ͼ2 .cm-tooltip-autocomplete-disabled ul li[aria-selected]
-.ͼ3 .cm-tooltip-autocomplete ul li[aria-selected]
-.ͼ3 .cm-tooltip-autocomplete-disabled ul li[aria-selected]
-.ͼ1 .cm-completionListIncompleteTop:before, .ͼ1 .cm-completionListIncompleteBottom:after
-.ͼ1 .cm-tooltip.cm-completionInfo
-.ͼ1 .cm-completionInfo.cm-completionInfo-left
-.ͼ1 .cm-completionInfo.cm-completionInfo-right
-.ͼ1 .cm-completionInfo.cm-completionInfo-left-narrow
-.ͼ1 .cm-completionInfo.cm-completionInfo-right-narrow
-.ͼ2 .cm-snippetField
-.ͼ3 .cm-snippetField
-.ͼ1 .cm-snippetFieldPosition
-.ͼ1 .cm-completionMatchedText
-.ͼ1 .cm-completionDetail
-.ͼ1 .cm-completionIcon
-.ͼ1 .cm-completionIcon-function:after, .ͼ1 .cm-completionIcon-method:after
-.ͼ1 .cm-completionIcon-class:after
-.ͼ1 .cm-completionIcon-interface:after
-.ͼ1 .cm-completionIcon-variable:after
-.ͼ1 .cm-completionIcon-constant:after
-.ͼ1 .cm-completionIcon-type:after
-.ͼ1 .cm-completionIcon-enum:after
-.ͼ1 .cm-completionIcon-property:after
-.ͼ1 .cm-completionIcon-keyword:after
-.ͼ1 .cm-completionIcon-namespace:after
-.ͼ1 .cm-completionIcon-text:after
-.ͼ1 .cm-tooltip
-.ͼ2 .cm-tooltip
-.ͼ2 .cm-tooltip-section:not(:first-child)
-.ͼ3 .cm-tooltip
-.ͼ1 .cm-tooltip-arrow:before, .ͼ1 .cm-tooltip-arrow:after
-.ͼ1 .cm-tooltip-above .cm-tooltip-arrow:before
-.ͼ1 .cm-tooltip-above .cm-tooltip-arrow:after
-.ͼ1 .cm-tooltip-above .cm-tooltip-arrow
-.ͼ1 .cm-tooltip-below .cm-tooltip-arrow:before
-.ͼ1 .cm-tooltip-below .cm-tooltip-arrow:after
-.ͼ1 .cm-tooltip-below .cm-tooltip-arrow
-.ͼ1 .cm-tooltip-arrow
-.ͼ3 .cm-tooltip .cm-tooltip-arrow:before
-.ͼ3 .cm-tooltip .cm-tooltip-arrow:after
-.ͼ1.cm-focused .cm-matchingBracket
-.ͼ1.cm-focused .cm-nonmatchingBracket
-.ͼ1 .cm-foldPlaceholder
-.ͼ1 .cm-foldGutter span
-.ͼ5 {color: #404740;}
-.ͼ6 {text-decoration: underline;}
-.ͼ7 {text-decoration: underline; font-weight: bold;}
-.ͼ8 {font-style: italic;}
-.ͼ9 {font-weight: bold;}
-.ͼa {text-decoration: line-through;}
-.ͼb {color: #708;}
-.ͼc {color: #219;}
-.ͼd {color: #164;}
-.ͼe {color: #a11;}
-.ͼf {color: #e40;}
-.ͼg {color: #00f;}
-.ͼh {color: #30a;}
-.ͼi {color: #085;}
-.ͼj {color: #167;}
-.ͼk {color: #256;}
-.ͼl {color: #00c;}
-.ͼm {color: #940;}
-.ͼn {color: #f00;}
-.ͼ4 .cm-line ::selection, .ͼ4 .cm-line::selection
-.ͼ4 .cm-line
-.ͼ4 .cm-content :focus::selection, .ͼ4 .cm-content :focus ::selection
-.ͼ4 .cm-content :focus
-.ͼ4 .cm-content
