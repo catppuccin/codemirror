@@ -32,7 +32,7 @@
     "prepare": "pnpm run build",
     "build": "cm-buildhelper src/catppuccin.ts",
     "watch": "nodemon --watch src -e ts --exec 'pnpm build'",
-    "write-less": "npx tsx src/less.ts > src/cm6map.less"
+    "write-less": "npx tsx src/less.ts > src/cm6.css"
   },
   "files": [
     "dist"
