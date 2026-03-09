@@ -149,12 +149,6 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
     { tag: t.invalid, color: colors.red.hex },
   ]);
 
-  if (highlightStyle.module) {
-    console.log(highlightStyle.module.getRules());
-  } else {
-    console.log("No auto-generated rules (all specs use explicit classes)");
-  }
-
   return [theme, syntaxHighlighting(highlightStyle)];
 }
 
