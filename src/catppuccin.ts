@@ -25,7 +25,7 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
 
       "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
         {
-          backgroundColor: `${colors.overlay2.hex}40`
+          backgroundColor: `${colors.overlay2.hex}40`,
         },
 
       ".cm-panels": {
@@ -92,7 +92,7 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
         },
       },
     },
-    { dark: isDark }
+    { dark: isDark },
   );
 
   const highlightStyle = HighlightStyle.define([
@@ -149,15 +149,21 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
     { tag: t.invalid, color: colors.red.hex },
   ]);
 
+  if (highlightStyle.module) {
+    console.log(highlightStyle.module.getRules());
+  } else {
+    console.log("No auto-generated rules (all specs use explicit classes)");
+  }
+
   return [theme, syntaxHighlighting(highlightStyle)];
 }
 
 // Create extensions for all variants
 export const catppuccinLatte: Extension = createCatppuccinTheme(flavors.latte);
 export const catppuccinFrappe: Extension = createCatppuccinTheme(
-  flavors.frappe
+  flavors.frappe,
 );
 export const catppuccinMacchiato: Extension = createCatppuccinTheme(
-  flavors.macchiato
+  flavors.macchiato,
 );
 export const catppuccinMocha: Extension = createCatppuccinTheme(flavors.mocha);

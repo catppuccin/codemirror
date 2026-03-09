@@ -31,8 +31,7 @@
   "scripts": {
     "prepare": "pnpm run build",
     "build": "cm-buildhelper src/catppuccin.ts",
-    "watch": "nodemon --watch src -e ts --exec 'pnpm build'",
-    "write-less": "npx tsx src/less.ts > src/cm6.css"
+    "watch": "nodemon --watch src -e ts --exec 'pnpm build'"
   },
   "files": [
     "dist"
@@ -46,7 +45,6 @@
   "module": "dist/index.js",
   "dependencies": {
     "@catppuccin/palette": "^1.7.1",
-    "@codemirror/language": "^6.12.1",
     "@codemirror/state": "^6.5.4",
     "@codemirror/view": "^6.39.15",
     "@lezer/highlight": "^1.2.3"
