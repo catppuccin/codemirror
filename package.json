@@ -45,14 +45,14 @@
   "types": "dist/index.d.ts",
   "module": "dist/index.js",
   "dependencies": {
-    "@catppuccin/palette": "^1.8.0",
-    "@codemirror/language": "^6.12.3",
-    "@codemirror/state": "^6.6.0",
-    "@codemirror/view": "^6.41.0",
+    "@catppuccin/palette": "^1.7.1",
+    "@codemirror/language": "^6.12.1",
+    "@codemirror/state": "^6.5.4",
+    "@codemirror/view": "^6.39.15",
     "@lezer/highlight": "^1.2.3"
   },
   "devDependencies": {
-    "@codemirror/buildhelper": "^1.0.2",
+    "@codemirror/buildhelper": "^1.0.0",
     "@types/clean-css": "^4.2.11",
     "@types/node": "^25.5.2",
     "clean-css": "^5.3.3",

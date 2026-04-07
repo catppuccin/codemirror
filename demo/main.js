@@ -1,4 +1,4 @@
-import { basicSetup, EditorView } from "codemirror";
+import { EditorView, basicSetup } from "codemirror";
 import { Compartment, EditorState } from "@codemirror/state";
 import { javascript } from "@codemirror/lang-javascript";
 import { css } from "@codemirror/lang-css";
@@ -17,8 +17,8 @@ import { csharp } from "@replit/codemirror-lang-csharp";
 import { nix } from "@replit/codemirror-lang-nix";
 import { flavors } from "@catppuccin/palette";
 import {
-  catppuccinFrappe,
   catppuccinLatte,
+  catppuccinFrappe,
   catppuccinMacchiato,
   catppuccinMocha,
 } from "@catppuccin/codemirror";

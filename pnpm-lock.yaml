@@ -9,23 +9,23 @@ importers:
   .:
     dependencies:
       '@catppuccin/palette':
-        specifier: ^1.8.0
+        specifier: ^1.7.1
         version: 1.8.0
       '@codemirror/language':
-        specifier: ^6.12.3
+        specifier: ^6.12.1
         version: 6.12.3
       '@codemirror/state':
-        specifier: ^6.6.0
+        specifier: ^6.5.4
         version: 6.6.0
       '@codemirror/view':
-        specifier: ^6.41.0
+        specifier: ^6.39.15
         version: 6.41.0
       '@lezer/highlight':
         specifier: ^1.2.3
         version: 1.2.3
     devDependencies:
       '@codemirror/buildhelper':
-        specifier: ^1.0.2
+        specifier: ^1.0.0
         version: 1.0.2
       '@types/clean-css':
         specifier: ^4.2.11
@@ -537,10 +537,6 @@ packages:
   brace-expansion@5.0.5:
     resolution: {integrity: sha512-VZznLgtwhn+Mact9tfiwx64fA9erHH/MCXEUfB/0bX/6Fz6ny5EGTXYltMocqg4xFAQZtnO3DHWWXi8RiuN7cQ==}
     engines: {node: 18 || 20 || >=22}
-
-  brace-expansion@5.0.2:
-    resolution: {integrity: sha512-Pdk8c9poy+YhOgVWw1JNN22/HcivgKWwpxKq04M/jTmHyCZn12WPJebZxdjSa5TmBqISrUSgNYU3eRORljfCCw==}
-    engines: {node: 20 || >=22}
 
   braces@3.0.3:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
