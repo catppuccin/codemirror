@@ -29,8 +29,9 @@
     "url": "https://catppuccin.com"
   },
   "scripts": {
-    "prepare": "pnpm run build",
+    "prepare": "pnpm run build; pnpm run build-css",
     "build": "cm-buildhelper src/catppuccin.ts",
+    "build-css": "tsx src/build.ts",
     "watch": "nodemon --watch src -e ts --exec 'pnpm build'"
   },
   "files": [
@@ -44,15 +45,20 @@
   "types": "dist/index.d.ts",
   "module": "dist/index.js",
   "dependencies": {
-    "@catppuccin/palette": "^1.7.1",
-    "@codemirror/language": "^6.12.2",
-    "@codemirror/state": "^6.5.4",
-    "@codemirror/view": "^6.39.15",
+    "@catppuccin/palette": "^1.8.0",
+    "@codemirror/language": "^6.12.3",
+    "@codemirror/state": "^6.6.0",
+    "@codemirror/view": "^6.41.0",
     "@lezer/highlight": "^1.2.3"
   },
   "devDependencies": {
-    "@codemirror/buildhelper": "^1.0.0",
-    "nodemon": "^3.1.14"
+    "@codemirror/buildhelper": "^1.0.2",
+    "@types/clean-css": "^4.2.11",
+    "@types/node": "^25.5.2",
+    "clean-css": "^5.3.3",
+    "nodemon": "^3.1.14",
+    "puppeteer": "^24.40.0",
+    "tsx": "^4.21.0"
   },
   "packageManager": "pnpm@10.30.1"
 }
