@@ -71,6 +71,7 @@
     "@types/clean-css": "^4.2.11",
     "@types/express": "^5.0.6",
     "@types/node": "^25.5.2",
+    "ansis": "^4.2.0",
     "clean-css": "^5.3.3",
     "codemirror": "^6.0.2",
     "express": "^5.2.1",

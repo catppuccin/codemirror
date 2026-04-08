@@ -1,15 +1,16 @@
 import { flavors } from "@catppuccin/palette";
+import { cyan, green, hex, magenta, red, white } from "ansis";
 
-import chalk from "chalk";
 import CleanCSS from "clean-css";
 import express from "express";
 import fs from "fs";
-import type { Server } from "http";
 import process from "node:process";
 import path from "path";
 import postcss from "postcss";
-import type { Plugin } from "postcss";
 import puppeteer from "puppeteer";
+
+import type { Server } from "http";
+import type { Plugin } from "postcss";
 
 const app = express();
 const out_dir = path.join(process.cwd(), "dist", "css");
@@ -33,23 +34,18 @@ fs.mkdirSync(out_dir, { recursive: true });
 
 const createLogger = (palette?: typeof flavors.macchiato) => {
   const logtype_enum: Record<string, (s: string) => string> = {
-    ERROR: palette ? (s) => chalk.hex(palette.colors.red.hex)(s) : chalk.red,
-    SUCCESS: palette
-      ? (s) => chalk.hex(palette.colors.green.hex)(s)
-      : chalk.green,
-    LOG: palette ? (s) => chalk.hex(palette.colors.teal.hex)(s) : chalk.cyan,
-    EXIT: palette
-      ? (s) => chalk.hex(palette.colors.mauve.hex)(s)
-      : chalk.magenta,
+    ERROR: palette?.colors.red.hex ? hex(palette.colors.red.hex) : red,
+    SUCCESS: palette?.colors.green.hex ? hex(palette.colors.green.hex) : green,
+    LOG: palette?.colors.teal.hex ? hex(palette.colors.teal.hex) : cyan,
+    EXIT: palette?.colors.mauve.hex ? hex(palette.colors.mauve.hex) : magenta,
   };
 
   return (type: string, context: string, message: string) => {
     const logtype_pad = type.padEnd(7);
     const context_pad = context.padEnd(11);
-    const colorize = logtype_enum[type] ||
-      (palette ? (s) => chalk.hex(palette.colors.overlay0.hex)(s) : chalk.gray);
+    const colorize = logtype_enum[type] || white;
 
-    return `[${colorize(logtype_pad)}] ${chalk.dim(context_pad)} ${message}`;
+    return `[${colorize(logtype_pad)}] ${colorize(context_pad)} ${message}`;
   };
 };
 
