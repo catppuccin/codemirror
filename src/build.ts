@@ -240,13 +240,13 @@ async function processFlavorThread(
     console.log(flavorLogger("LOG", flavor, `4. writing to ${filename}`));
     fs.writeFileSync(filename, css, "utf-8");
 
-    console.log(flavorLogger("SUCCESS", flavor, `- complete: ${filename}`));
+    console.log(flavorLogger("SUCCESS", flavor, `-  complete: ${filename}`));
   } catch (error) {
     console.error(
       flavorLogger(
         "ERROR",
         flavor,
-        `- ${error instanceof Error ? error.message : String(error)}`,
+        `-  ${error instanceof Error ? error.message : String(error)}`,
       ),
     );
   }
@@ -266,4 +266,4 @@ console.log(termLogger("LOG", "SERVER", `-  closing server.`));
 await new Promise<void>((resolve) => {
   server.close(() => resolve());
 });
-console.log(termLogger("EXIT", "build.ts", "- success"));
+console.log(termLogger("EXIT", "build.ts", "-  success"));
