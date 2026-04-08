@@ -1,14 +1,15 @@
 import { flavors } from "@catppuccin/palette";
 import { cyan, green, hex, magenta, red, white } from "ansis";
+import { StyleModule } from "style-mod";
 
 import CleanCSS from "clean-css";
 import fs from "fs";
 import process from "node:process";
 import path from "path";
 import postcss from "postcss";
-import { StyleModule, type StyleSpec } from "style-mod";
 
 import type { Plugin } from "postcss";
+import type { StyleSpec } from "style-mod";
 
 import {
   createCatppuccinHighlightStyle,
