@@ -1,4 +1,6 @@
 import { flavors } from "@catppuccin/palette";
+
+import chalk from "chalk";
 import CleanCSS from "clean-css";
 import express from "express";
 import fs from "fs";
@@ -11,7 +13,7 @@ import puppeteer from "puppeteer";
 
 const app = express();
 const out_dir = path.join(process.cwd(), "dist", "css");
-const props = new Set([
+const props: Set<string> = new Set([
   "color",
   "background-color",
   "border-color",
@@ -29,11 +31,29 @@ const props = new Set([
 
 fs.mkdirSync(out_dir, { recursive: true });
 
-const formatLog = (type: string, context: string, message: string) => {
-  const typePad = type.padEnd(7);
-  const contextPad = context.padEnd(11);
-  return `[${typePad}] ${contextPad} ${message}`;
+const createLogger = (palette?: typeof flavors.macchiato) => {
+  const logtype_enum: Record<string, (s: string) => string> = {
+    ERROR: palette ? (s) => chalk.hex(palette.colors.red.hex)(s) : chalk.red,
+    SUCCESS: palette
+      ? (s) => chalk.hex(palette.colors.green.hex)(s)
+      : chalk.green,
+    LOG: palette ? (s) => chalk.hex(palette.colors.teal.hex)(s) : chalk.cyan,
+    EXIT: palette
+      ? (s) => chalk.hex(palette.colors.mauve.hex)(s)
+      : chalk.magenta,
+  };
+
+  return (type: string, context: string, message: string) => {
+    const logtype_pad = type.padEnd(7);
+    const context_pad = context.padEnd(11);
+    const colorize = logtype_enum[type] ||
+      (palette ? (s) => chalk.hex(palette.colors.overlay0.hex)(s) : chalk.gray);
+
+    return `[${colorize(logtype_pad)}] ${chalk.dim(context_pad)} ${message}`;
+  };
 };
+
+const termLogger: ReturnType<typeof createLogger> = createLogger();
 
 const extractColorDeclarationsPlugin: Plugin = {
   postcssPlugin: "extract-colors",
@@ -104,7 +124,7 @@ function startLocalServer(port: number): Promise<Server> {
   return new Promise((resolve) => {
     const server = app.listen(port, () => {
       console.log(
-        formatLog(
+        termLogger(
           "LOG",
           "SERVER",
           "-  serving http://localhost:${port}.",
@@ -118,16 +138,17 @@ function startLocalServer(port: number): Promise<Server> {
 async function fetchStyleSheetFromPage(
   flavor: string,
   port: number,
+  flavorLogger: ReturnType<typeof createLogger>,
 ): Promise<string> {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   try {
     console.log(
-      formatLog(
+      flavorLogger(
         "LOG",
         flavor,
-        "-  navigating frame to http://localhost:${port}/#${flavor} (timeout: 30s)...",
+        `-  navigating frame to http://localhost:${port}/#${flavor} (timeout: 30s)...`,
       ),
     );
     await page.goto(`http://localhost:${port}/#${flavor}`, {
@@ -136,16 +157,16 @@ async function fetchStyleSheetFromPage(
     });
 
     console.log(
-      formatLog(
+      flavorLogger(
         "LOG",
         flavor,
-        "-  waiting for load of stylesheet with .cm-editor selector (timeout: 5s)...",
+        `-  waiting for load of stylesheet with .cm-editor selector (timeout: 5s)...`,
       ),
     );
     await page.waitForSelector(".cm-editor", { timeout: 5000 });
 
     console.log(
-      formatLog(
+      flavorLogger(
         "LOG",
         flavor,
         "-  sleep 1s to allow time to render...",
@@ -156,7 +177,7 @@ async function fetchStyleSheetFromPage(
     );
 
     console.log(
-      formatLog(
+      flavorLogger(
         "LOG",
         flavor,
         "-  extracting stylesheet...",
@@ -175,7 +196,7 @@ async function fetchStyleSheetFromPage(
     }
 
     console.log(
-      formatLog(
+      flavorLogger(
         "LOG",
         flavor,
         "-  extracted ${css.length} chars.",
@@ -192,32 +213,37 @@ async function processFlavorThread(
   port: number,
   minifier: InstanceType<typeof CleanCSS>,
 ): Promise<void> {
+  const palette = flavors[flavor as keyof typeof flavors];
+  const flavorLogger: ReturnType<typeof createLogger> = createLogger(palette);
+
   try {
     console.log(
-      formatLog(
+      flavorLogger(
         "LOG",
         flavor,
-        "1. rendering: http://localhost:${port}/#${flavor}...",
+        `1. rendering: http://localhost:${port}/#${flavor}...`,
       ),
     );
-    let css = await fetchStyleSheetFromPage(flavor, port);
+    let css = await fetchStyleSheetFromPage(flavor, port, flavorLogger);
 
-    console.log(formatLog("LOG", flavor, `2. matching only color rules...`));
+    console.log(
+      flavorLogger("LOG", flavor, `2. matching only color rules...`),
+    );
     css = postcss([extractColorDeclarationsPlugin]).process(css, {
       from: undefined,
     }).css;
 
-    console.log(formatLog("LOG", flavor, `3. minifying...`));
+    console.log(flavorLogger("LOG", flavor, `3. minifying...`));
     css = minifier.minify(css).styles;
 
     const filename = path.join(out_dir, `catppuccin-${flavor}.css`);
-    console.log(formatLog("LOG", flavor, `4. writing to ${filename}`));
+    console.log(flavorLogger("LOG", flavor, `4. writing to ${filename}`));
     fs.writeFileSync(filename, css, "utf-8");
 
-    console.log(formatLog("SUCCESS", flavor, `- complete: ${filename}`));
+    console.log(flavorLogger("SUCCESS", flavor, `- complete: ${filename}`));
   } catch (error) {
     console.error(
-      formatLog(
+      flavorLogger(
         "ERROR",
         flavor,
         `- ${error instanceof Error ? error.message : String(error)}`,
@@ -226,9 +252,9 @@ async function processFlavorThread(
   }
 }
 
-const minifier = new CleanCSS();
-const PORT = 3000;
-const server = await startLocalServer(PORT);
+const minifier: InstanceType<typeof CleanCSS> = new CleanCSS();
+const PORT = 3000 as const;
+const server: Server = await startLocalServer(PORT);
 
 await Promise.all(
   Object.keys(flavors).map((flavor) =>
@@ -236,8 +262,8 @@ await Promise.all(
   ),
 );
 
-console.log(formatLog("LOG", "SERVER", `-  closing server.`));
+console.log(termLogger("LOG", "SERVER", `-  closing server.`));
 await new Promise<void>((resolve) => {
   server.close(() => resolve());
 });
-console.log(formatLog("EXIT", "build.ts", "- success"));
+console.log(termLogger("EXIT", "build.ts", "- success"));
