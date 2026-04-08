@@ -1,3 +1,4 @@
+import { flavors as catppuccin_flavors } from "@catppuccin/palette";
 import puppeteer from "puppeteer";
 import fs from "fs";
 import path from "path";
@@ -5,7 +6,7 @@ import CleanCSS from "clean-css";
 import process from "node:process";
 import http from "http";
 
-const flavors = ["latte", "frappe", "macchiato", "mocha"];
+const flavors = Object.keys(catppuccin_flavors);
 const out_dir = path.join(process.cwd(), "dist", "css");
 
 if (!fs.existsSync(out_dir)) {
