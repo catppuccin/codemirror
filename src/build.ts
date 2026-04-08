@@ -2,6 +2,7 @@ import { flavors } from "@catppuccin/palette";
 import CleanCSS from "clean-css";
 import express from "express";
 import fs from "fs";
+import type { Server } from "http";
 import process from "node:process";
 import path from "path";
 import postcss from "postcss";
@@ -26,6 +27,8 @@ const props = new Set([
   "box-shadow",
 ]);
 
+fs.mkdirSync(out_dir, { recursive: true });
+
 const extractColorDeclarationsPlugin: Plugin = {
   postcssPlugin: "extract-colors",
   Once(root: postcss.Root) {
@@ -40,7 +43,7 @@ const extractColorDeclarationsPlugin: Plugin = {
         } else if (
           (prop === "background" || prop === "border" ||
             prop === "outline") &&
-          /^(#|rgb|hsl)/.test(decl.value)
+          /^(#|rgba?|hsla?)/.test(decl.value)
         ) {
           const cloned = decl.clone();
           cloned.prop = prop === "background"
@@ -59,10 +62,6 @@ const extractColorDeclarationsPlugin: Plugin = {
     });
   },
 };
-
-if (!fs.existsSync(out_dir)) {
-  fs.mkdirSync(out_dir, { recursive: true });
-}
 
 app.use(
   (
@@ -95,7 +94,7 @@ app.use(express.static("demo"));
 // Serve dist at /dist
 app.use("/dist", express.static("dist"));
 
-function startLocalServer(port: number): Promise<any> {
+function startLocalServer(port: number): Promise<Server> {
   return new Promise((resolve) => {
     const server = app.listen(port, () => {
       console.log(`[LOG](SERVER) - serving http://localhost:${port}`);
