@@ -1,13 +1,14 @@
 import { flavors as catppuccin_flavors } from "@catppuccin/palette";
 import CleanCSS from "clean-css";
+import express from "express";
 import fs from "fs";
-import http from "http";
 import process from "node:process";
 import path from "path";
 import postcss from "postcss";
 import type { Plugin } from "postcss";
 import puppeteer from "puppeteer";
 
+const app = express();
 const flavors = Object.keys(catppuccin_flavors);
 const out_dir = path.join(process.cwd(), "dist", "css");
 const props = new Set([
@@ -64,74 +65,47 @@ if (!fs.existsSync(out_dir)) {
   fs.mkdirSync(out_dir, { recursive: true });
 }
 
-function startServer(port: number): Promise<http.Server> {
-  return new Promise((resolve) => {
-    const server = http.createServer((req, res) => {
-      const url = req.url ?? "/";
-
-      if (url === "/favicon.ico") {
-        res.writeHead(204);
-        res.end();
-        return;
-      }
-
-      console.log(`- ${req.method} ${url}`);
-
-      let site_path = path.join(
-        process.cwd(),
-        url === "/" ? "demo/index.html" : url,
-      );
-
-      if (url === "/") {
-        site_path = path.join(process.cwd(), "demo", "index.html");
-      } else if (url.startsWith("/dist/")) {
-        // serve dist from root
-        site_path = path.join(process.cwd(), url);
-      } else {
-        // all else from demo
-        site_path = path.join(process.cwd(), "demo", url);
-      }
-
-      let content: string;
-
-      try {
-        content = fs.readFileSync(site_path, "utf-8");
-      } catch (error) {
-        console.error(`file not found: ${site_path}`);
-        res.writeHead(404);
-        res.end("Not Found");
-        return;
-      }
-
-      const ext = path.extname(site_path).toLowerCase();
-
-      if (ext === ".html") {
-        content = content.replace(
+app.use(
+  (
+    req: { path: string },
+    res: { send: (data: any) => any },
+    next: () => void,
+  ) => {
+    const originalSend = res.send;
+    res.send = function (data: any) {
+      if (
+        typeof data === "string" &&
+        (req.path === "/" || req.path.endsWith(".html"))
+      ) {
+        data = data.replace(
           '"@catppuccin/codemirror": "./index.js"',
           '"@catppuccin/codemirror": "/dist/index.js"',
         );
       }
+      return originalSend.call(this, data);
+    };
+    next();
+  },
+);
 
-      const buffer = Buffer.from(content);
-      const mimetype = {
-        ".html": "text/html; charset=utf-8",
-        ".js": "application/javascript; charset=utf-8",
-        ".css": "text/css; charset=utf-8",
-        ".json": "application/json; charset=utf-8",
-        ".mjs": "application/javascript; charset=utf-8",
-      }[ext] || "text/plain";
-      res.writeHead(200, { "Content-Type": mimetype });
-      res.end(buffer);
-    });
+///  Serve Priority
+// Serve dist at root
+app.use(express.static("dist"));
+// Serve demo as root
+app.use(express.static("demo"));
+// Serve dist at /dist
+app.use("/dist", express.static("dist"));
 
-    server.listen(port, () => {
-      console.log(`serving http://localhost:${port}`);
+function startLocalServer(port: number): Promise<any> {
+  return new Promise((resolve) => {
+    const server = app.listen(port, () => {
+      console.log(`[LOG](SERVER) - serving http://localhost:${port}`);
       resolve(server);
     });
   });
 }
 
-async function fetchStyleSheetFromSite(
+async function fetchStyleSheetFromPage(
   flavor: string,
   port: number,
 ): Promise<string> {
@@ -157,12 +131,46 @@ async function fetchStyleSheetFromSite(
         .join("\n\n");
     });
 
+    if (!css) {
+      throw new Error("No CSS found in page");
+    }
+
     return css;
-  } catch (error) {
-    console.error(`error(${flavor}):`, error);
-    return "";
   } finally {
     await browser.close();
+  }
+}
+
+async function processFlavorThread(
+  flavor: string,
+  port: number,
+  minifier: InstanceType<typeof CleanCSS>,
+): Promise<void> {
+  try {
+    console.log(
+      `[LOG](${flavor}) 1. rendering: http://localhost:${port}/#${flavor}...`,
+    );
+    let css = await fetchStyleSheetFromPage(flavor, port);
+
+    console.log(`[LOG](${flavor}) 2. matching only color rules...`);
+    css = postcss([extractColorDeclarationsPlugin]).process(css, {
+      from: undefined,
+    }).css;
+
+    console.log(`[LOG](${flavor}) 3. minifying...`);
+    css = minifier.minify(css).styles;
+
+    const filename = path.join(out_dir, `catppuccin-${flavor}.css`);
+    console.log(`[LOG](${flavor}) 4. writing to ${filename}`);
+    fs.writeFileSync(filename, css, "utf-8");
+
+    console.log(`[LOG](${flavor}) complete: ${filename}`);
+  } catch (error) {
+    console.error(
+      `[ERROR](${flavor}) - ${
+        error instanceof Error ? error.message : String(error)
+      }`,
+    );
   }
 }
 
@@ -170,30 +178,17 @@ async function main() {
   const minifier = new CleanCSS();
 
   const PORT = 3000;
-  const server = await startServer(PORT);
+  const server = await startLocalServer(PORT);
 
-  for (const flavor of flavors) {
-    console.log(`1. rendering: http://localhost:${PORT}/#${flavor}...`);
-    let css = await fetchStyleSheetFromSite(flavor, PORT);
+  await Promise.all(
+    flavors.map((flavor) => processFlavorThread(flavor, PORT, minifier)),
+  );
 
-    if (css) {
-      console.log(`2. matching only color rules...`);
-      css = postcss([extractColorDeclarationsPlugin]).process(css, {
-        from: undefined,
-      }).css;
-      console.log(`3. minifying...`);
-      css = minifier.minify(css).styles;
-      const filename = path.join(out_dir, `catppuccin-${flavor}.css`);
-      fs.writeFileSync(filename, css, "utf-8");
-      console.log(`== output: ${filename}`);
-    } else {
-      console.log(`== error(${flavor}): failed to extract css.`);
-    }
-  }
-
-  console.log("closing server.");
-  server.close();
-  console.log("success.");
+  console.log("[LOG](SERVER) - closing server.");
+  await new Promise<void>((resolve) => {
+    server.close(() => resolve());
+  });
+  console.log("[EXIT] - success.");
 }
 
 main();
