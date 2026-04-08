@@ -1,5 +1,5 @@
 /node_modules
 package-lock.json
-pnpm-lock.json
+pnpm-lock.yaml
 dist
 demo/index.js

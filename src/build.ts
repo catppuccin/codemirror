@@ -26,7 +26,7 @@ const props = new Set([
   "box-shadow",
 ]);
 
-const colorPlugin: Plugin = {
+const extractColorDeclarationsPlugin: Plugin = {
   postcssPlugin: "extract-colors",
   Once(root: postcss.Root) {
     root.walkRules((rule: postcss.Rule) => {
@@ -131,7 +131,10 @@ function startServer(port: number): Promise<http.Server> {
   });
 }
 
-async function fetch(flavor: string, port: number): Promise<string> {
+async function fetchStyleSheetFromSite(
+  flavor: string,
+  port: number,
+): Promise<string> {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
@@ -171,11 +174,13 @@ async function main() {
 
   for (const flavor of flavors) {
     console.log(`1. rendering: http://localhost:${PORT}/#${flavor}...`);
-    let css = await fetch(flavor, PORT);
+    let css = await fetchStyleSheetFromSite(flavor, PORT);
 
     if (css) {
       console.log(`2. matching only color rules...`);
-      css = postcss([colorPlugin]).process(css, { from: undefined }).css;
+      css = postcss([extractColorDeclarationsPlugin]).process(css, {
+        from: undefined,
+      }).css;
       console.log(`3. minifying...`);
       css = minifier.minify(css).styles;
       const filename = path.join(out_dir, `catppuccin-${flavor}.css`);
