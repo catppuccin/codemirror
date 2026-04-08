@@ -11,6 +11,7 @@ import puppeteer from "puppeteer";
 
 const app = express();
 const out_dir = path.join(process.cwd(), "dist", "css");
+const pad = (text: string, width: number = 11) => text.padEnd(width);
 const props = new Set([
   "color",
   "background-color",
@@ -97,7 +98,7 @@ app.use("/dist", express.static("dist"));
 function startLocalServer(port: number): Promise<Server> {
   return new Promise((resolve) => {
     const server = app.listen(port, () => {
-      console.log(`[LOG](SERVER) - serving http://localhost:${port}`);
+      console.log(`[LOG] ${pad("SERVER")} - serving http://localhost:${port}`);
       resolve(server);
     });
   });
@@ -146,49 +147,46 @@ async function processFlavorThread(
 ): Promise<void> {
   try {
     console.log(
-      `[LOG](${flavor}) 1. rendering: http://localhost:${port}/#${flavor}...`,
+      `[LOG] ${
+        pad(flavor)
+      } 1. rendering: http://localhost:${port}/#${flavor}...`,
     );
     let css = await fetchStyleSheetFromPage(flavor, port);
 
-    console.log(`[LOG](${flavor}) 2. matching only color rules...`);
+    console.log(`[LOG] ${pad(flavor)} 2. matching only color rules...`);
     css = postcss([extractColorDeclarationsPlugin]).process(css, {
       from: undefined,
     }).css;
 
-    console.log(`[LOG](${flavor}) 3. minifying...`);
+    console.log(`[LOG] ${pad(flavor)} 3. minifying...`);
     css = minifier.minify(css).styles;
 
     const filename = path.join(out_dir, `catppuccin-${flavor}.css`);
-    console.log(`[LOG](${flavor}) 4. writing to ${filename}`);
+    console.log(`[LOG] ${pad(flavor)} 4. writing to ${filename}`);
     fs.writeFileSync(filename, css, "utf-8");
 
-    console.log(`[LOG](${flavor}) complete: ${filename}`);
+    console.log(`[LOG] ${pad(flavor)} - complete: ${filename}`);
   } catch (error) {
     console.error(
-      `[ERROR](${flavor}) - ${
+      `[ERROR] ${pad(flavor)} - ${
         error instanceof Error ? error.message : String(error)
       }`,
     );
   }
 }
 
-async function main() {
-  const minifier = new CleanCSS();
+const minifier = new CleanCSS();
+const PORT = 3000;
+const server = await startLocalServer(PORT);
 
-  const PORT = 3000;
-  const server = await startLocalServer(PORT);
+await Promise.all(
+  Object.keys(flavors).map((flavor) =>
+    processFlavorThread(flavor, PORT, minifier)
+  ),
+);
 
-  await Promise.all(
-    Object.keys(flavors).map((flavor) =>
-      processFlavorThread(flavor, PORT, minifier)
-    ),
-  );
-
-  console.log("[LOG](SERVER) - closing server.");
-  await new Promise<void>((resolve) => {
-    server.close(() => resolve());
-  });
-  console.log("[EXIT] - success.");
-}
-
-main();
+console.log(`[LOG] ${pad("SERVER")} - closing server.`);
+await new Promise<void>((resolve) => {
+  server.close(() => resolve());
+});
+console.log("[EXIT] - success.");
