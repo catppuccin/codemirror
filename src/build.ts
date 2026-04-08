@@ -91,9 +91,6 @@ function colorMatch(css: string): string {
 }
 
 async function fetchTheme(flavor: string): Promise<string> {
-  console.log(
-    `fwetching CMv6 stywesheet fwom: https://codemirror.catppuccin.com/#${flavor} OwO`,
-  );
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
@@ -119,7 +116,7 @@ async function fetchTheme(flavor: string): Promise<string> {
 
     return css;
   } catch (error) {
-    console.error(`:c ewwow(${flavor}):`, error);
+    console.error(`error(${flavor}):`, error);
     return "";
   } finally {
     await browser.close();
@@ -129,22 +126,25 @@ async function fetchTheme(flavor: string): Promise<string> {
 async function main() {
   const minifier = new CleanCSS();
   for (const flavor of flavors) {
+    console.log(
+      `1. fetching CMv6 stylesheet from: https://codemirror.catppuccin.com/#${flavor}...`,
+    );
     let css = await fetchTheme(flavor);
 
     if (css) {
-      console.log(`matching onwy css wules...`);
+      console.log(`2. matching only color rules...`);
       css = colorMatch(css);
-      console.log(`mwinifwying ${flavor}`);
+      console.log(`3. minifying...`);
       css = minifier.minify(css).styles;
       const filename = path.join(out_dir, `catppuccin-${flavor}.css`);
       fs.writeFileSync(filename, css, "utf-8");
-      console.log(`UwU done: ${filename}`);
+      console.log(`- Output: ${filename}`);
     } else {
-      console.log(`OmO failed ${flavor}, no css fetchd..`);
+      console.log(`- error(${flavor}): failed to fetch any CSS.`);
     }
   }
 
-  console.log("compwete! yayyyyyy X3");
+  console.log("success");
 }
 
 main();
