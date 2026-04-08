@@ -1,4 +1,4 @@
-import { flavors as catppuccin_flavors } from "@catppuccin/palette";
+import { flavors } from "@catppuccin/palette";
 import CleanCSS from "clean-css";
 import express from "express";
 import fs from "fs";
@@ -9,7 +9,6 @@ import type { Plugin } from "postcss";
 import puppeteer from "puppeteer";
 
 const app = express();
-const flavors = Object.keys(catppuccin_flavors);
 const out_dir = path.join(process.cwd(), "dist", "css");
 const props = new Set([
   "color",
@@ -181,7 +180,9 @@ async function main() {
   const server = await startLocalServer(PORT);
 
   await Promise.all(
-    flavors.map((flavor) => processFlavorThread(flavor, PORT, minifier)),
+    Object.keys(flavors).map((flavor) =>
+      processFlavorThread(flavor, PORT, minifier)
+    ),
   );
 
   console.log("[LOG](SERVER) - closing server.");
