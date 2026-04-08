@@ -11,7 +11,6 @@ import puppeteer from "puppeteer";
 
 const app = express();
 const out_dir = path.join(process.cwd(), "dist", "css");
-const pad = (text: string, width: number = 11) => text.padEnd(width);
 const props = new Set([
   "color",
   "background-color",
@@ -29,6 +28,12 @@ const props = new Set([
 ]);
 
 fs.mkdirSync(out_dir, { recursive: true });
+
+const formatLog = (type: string, context: string, message: string) => {
+  const typePad = type.padEnd(7);
+  const contextPad = context.padEnd(11);
+  return `[${typePad}] ${contextPad} ${message}`;
+};
 
 const extractColorDeclarationsPlugin: Plugin = {
   postcssPlugin: "extract-colors",
@@ -98,7 +103,13 @@ app.use("/dist", express.static("dist"));
 function startLocalServer(port: number): Promise<Server> {
   return new Promise((resolve) => {
     const server = app.listen(port, () => {
-      console.log(`[LOG] ${pad("SERVER")} - serving http://localhost:${port}`);
+      console.log(
+        formatLog(
+          "LOG",
+          "SERVER",
+          "-  serving http://localhost:${port}.",
+        ),
+      );
       resolve(server);
     });
   });
@@ -112,16 +123,45 @@ async function fetchStyleSheetFromPage(
   const page = await browser.newPage();
 
   try {
+    console.log(
+      formatLog(
+        "LOG",
+        flavor,
+        "-  navigating frame to http://localhost:${port}/#${flavor} (timeout: 30s)...",
+      ),
+    );
     await page.goto(`http://localhost:${port}/#${flavor}`, {
       waitUntil: "networkidle2",
       timeout: 30000,
     });
 
+    console.log(
+      formatLog(
+        "LOG",
+        flavor,
+        "-  waiting for load of stylesheet with .cm-editor selector (timeout: 5s)...",
+      ),
+    );
     await page.waitForSelector(".cm-editor", { timeout: 5000 });
+
+    console.log(
+      formatLog(
+        "LOG",
+        flavor,
+        "-  sleep 1s to allow time to render...",
+      ),
+    );
     await page.evaluate(() =>
       new Promise((resolve) => setTimeout(resolve, 1000))
     );
 
+    console.log(
+      formatLog(
+        "LOG",
+        flavor,
+        "-  extracting stylesheet...",
+      ),
+    );
     const css = await page.evaluate(() => {
       const styles = Array.from(document.querySelectorAll("style"));
       return styles
@@ -131,9 +171,16 @@ async function fetchStyleSheetFromPage(
     });
 
     if (!css) {
-      throw new Error("No CSS found in page");
+      throw new Error("No matching CSS found in page");
     }
 
+    console.log(
+      formatLog(
+        "LOG",
+        flavor,
+        "-  extracted ${css.length} chars.",
+      ),
+    );
     return css;
   } finally {
     await browser.close();
@@ -147,30 +194,34 @@ async function processFlavorThread(
 ): Promise<void> {
   try {
     console.log(
-      `[LOG] ${
-        pad(flavor)
-      } 1. rendering: http://localhost:${port}/#${flavor}...`,
+      formatLog(
+        "LOG",
+        flavor,
+        "1. rendering: http://localhost:${port}/#${flavor}...",
+      ),
     );
     let css = await fetchStyleSheetFromPage(flavor, port);
 
-    console.log(`[LOG] ${pad(flavor)} 2. matching only color rules...`);
+    console.log(formatLog("LOG", flavor, `2. matching only color rules...`));
     css = postcss([extractColorDeclarationsPlugin]).process(css, {
       from: undefined,
     }).css;
 
-    console.log(`[LOG] ${pad(flavor)} 3. minifying...`);
+    console.log(formatLog("LOG", flavor, `3. minifying...`));
     css = minifier.minify(css).styles;
 
     const filename = path.join(out_dir, `catppuccin-${flavor}.css`);
-    console.log(`[LOG] ${pad(flavor)} 4. writing to ${filename}`);
+    console.log(formatLog("LOG", flavor, `4. writing to ${filename}`));
     fs.writeFileSync(filename, css, "utf-8");
 
-    console.log(`[LOG] ${pad(flavor)} - complete: ${filename}`);
+    console.log(formatLog("SUCCESS", flavor, `- complete: ${filename}`));
   } catch (error) {
     console.error(
-      `[ERROR] ${pad(flavor)} - ${
-        error instanceof Error ? error.message : String(error)
-      }`,
+      formatLog(
+        "ERROR",
+        flavor,
+        `- ${error instanceof Error ? error.message : String(error)}`,
+      ),
     );
   }
 }
@@ -185,8 +236,8 @@ await Promise.all(
   ),
 );
 
-console.log(`[LOG] ${pad("SERVER")} - closing server.`);
+console.log(formatLog("LOG", "SERVER", `-  closing server.`));
 await new Promise<void>((resolve) => {
   server.close(() => resolve());
 });
-console.log("[EXIT] - success.");
+console.log(formatLog("EXIT", "build.ts", "- success"));
