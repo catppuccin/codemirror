@@ -2,17 +2,19 @@ import { flavors } from "@catppuccin/palette";
 import { cyan, green, hex, magenta, red, white } from "ansis";
 
 import CleanCSS from "clean-css";
-import express from "express";
 import fs from "fs";
 import process from "node:process";
 import path from "path";
 import postcss from "postcss";
-import puppeteer from "puppeteer";
+import { StyleModule, type StyleSpec } from "style-mod";
 
-import type { Server } from "http";
 import type { Plugin } from "postcss";
 
-const app = express();
+import {
+  createCatppuccinHighlightStyle,
+  createCatppuccinThemeSpec,
+} from "./theme-spec";
+
 const out_dir = path.join(process.cwd(), "dist", "css");
 const props: Set<string> = new Set([
   "color",
@@ -85,151 +87,55 @@ const extractColorDeclarationsPlugin: Plugin = {
   },
 };
 
-app.use(
-  (
-    req: { path: string },
-    res: { send: (data: any) => any },
-    next: () => void,
-  ) => {
-    const originalSend = res.send;
-    res.send = function (data: any) {
-      if (
-        typeof data === "string" &&
-        (req.path === "/" || req.path.endsWith(".html"))
-      ) {
-        data = data.replace(
-          '"@catppuccin/codemirror": "./index.js"',
-          '"@catppuccin/codemirror": "/dist/index.js"',
-        );
-      }
-      return originalSend.call(this, data);
-    };
-    next();
-  },
-);
+function createThemeModule(spec: Record<string, StyleSpec>): StyleModule {
+  const prefix = StyleModule.newName();
 
-///  Serve Priority
-// Serve dist at root
-app.use(express.static("dist"));
-// Serve demo as root
-app.use(express.static("demo"));
-// Serve dist at /dist
-app.use("/dist", express.static("dist"));
+  return new StyleModule(spec, {
+    finish(selector: string) {
+      return /&/.test(selector)
+        ? selector.replace(/&\w*/, (matched: string) => {
+          if (matched === "&") {
+            return `.${prefix}`;
+          }
 
-function startLocalServer(port: number): Promise<Server> {
-  return new Promise((resolve) => {
-    const server = app.listen(port, () => {
-      console.log(
-        termLogger(
-          "LOG",
-          "SERVER",
-          "-  serving http://localhost:${port}.",
-        ),
-      );
-      resolve(server);
-    });
+          throw new RangeError(`Unsupported selector: ${matched}`);
+        })
+        : `.${prefix} ${selector}`;
+    },
   });
 }
 
-async function fetchStyleSheetFromPage(
+function processFlavorThread(
   flavor: string,
-  port: number,
-  flavorLogger: ReturnType<typeof createLogger>,
-): Promise<string> {
-  const browser = await puppeteer.launch({ headless: true });
-  const page = await browser.newPage();
-
-  try {
-    console.log(
-      flavorLogger(
-        "LOG",
-        flavor,
-        `-  navigating frame to http://localhost:${port}/#${flavor} (timeout: 30s)...`,
-      ),
-    );
-    await page.goto(`http://localhost:${port}/#${flavor}`, {
-      waitUntil: "networkidle2",
-      timeout: 30000,
-    });
-
-    console.log(
-      flavorLogger(
-        "LOG",
-        flavor,
-        `-  waiting for load of stylesheet with .cm-editor selector (timeout: 5s)...`,
-      ),
-    );
-    await page.waitForSelector(".cm-editor", { timeout: 5000 });
-
-    console.log(
-      flavorLogger(
-        "LOG",
-        flavor,
-        "-  sleep 1s to allow time to render...",
-      ),
-    );
-    await page.evaluate(() =>
-      new Promise((resolve) => setTimeout(resolve, 1000))
-    );
-
-    console.log(
-      flavorLogger(
-        "LOG",
-        flavor,
-        "-  extracting stylesheet...",
-      ),
-    );
-    const css = await page.evaluate(() => {
-      const styles = Array.from(document.querySelectorAll("style"));
-      return styles
-        .map((s) => s.textContent || "")
-        .filter((text) => text.trim().length > 0)
-        .join("\n\n");
-    });
-
-    if (!css) {
-      throw new Error("No matching CSS found in page");
-    }
-
-    console.log(
-      flavorLogger(
-        "LOG",
-        flavor,
-        "-  extracted ${css.length} chars.",
-      ),
-    );
-    return css;
-  } finally {
-    await browser.close();
-  }
-}
-
-async function processFlavorThread(
-  flavor: string,
-  port: number,
   minifier: InstanceType<typeof CleanCSS>,
-): Promise<void> {
+): void {
   const palette = flavors[flavor as keyof typeof flavors];
   const flavorLogger: ReturnType<typeof createLogger> = createLogger(palette);
 
   try {
     console.log(
-      flavorLogger(
-        "LOG",
-        flavor,
-        `1. rendering: http://localhost:${port}/#${flavor}...`,
-      ),
+      flavorLogger("LOG", flavor, "1. generating theme + highlight styles..."),
     );
-    let css = await fetchStyleSheetFromPage(flavor, port, flavorLogger);
+
+    const themeSpec = createCatppuccinThemeSpec(palette);
+    const themeCSS = createThemeModule(themeSpec).getRules();
+
+    const highlightStyle = createCatppuccinHighlightStyle(palette);
+    const highlightCSS = highlightStyle.module?.getRules() ?? "";
+
+    let css = [themeCSS, highlightCSS].filter(Boolean).join("\n\n");
+    console.log(
+      flavorLogger("LOG", flavor, `-  extracted ${css.length} chars.`),
+    );
 
     console.log(
-      flavorLogger("LOG", flavor, `2. matching only color rules...`),
+      flavorLogger("LOG", flavor, "2. matching only color rules..."),
     );
     css = postcss([extractColorDeclarationsPlugin]).process(css, {
       from: undefined,
     }).css;
 
-    console.log(flavorLogger("LOG", flavor, `3. minifying...`));
+    console.log(flavorLogger("LOG", flavor, "3. minifying..."));
     css = minifier.minify(css).styles;
 
     const filename = path.join(out_dir, `catppuccin-${flavor}.css`);
@@ -249,17 +155,9 @@ async function processFlavorThread(
 }
 
 const minifier: InstanceType<typeof CleanCSS> = new CleanCSS();
-const PORT = 3000 as const;
-const server: Server = await startLocalServer(PORT);
 
-await Promise.all(
-  Object.keys(flavors).map((flavor) =>
-    processFlavorThread(flavor, PORT, minifier)
-  ),
-);
+for (const flavor of Object.keys(flavors)) {
+  processFlavorThread(flavor, minifier);
+}
 
-console.log(termLogger("LOG", "SERVER", `-  closing server.`));
-await new Promise<void>((resolve) => {
-  server.close(() => resolve());
-});
 console.log(termLogger("EXIT", "build.ts", "-  success"));
