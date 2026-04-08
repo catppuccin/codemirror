@@ -1,13 +1,64 @@
 import { flavors as catppuccin_flavors } from "@catppuccin/palette";
-import puppeteer from "puppeteer";
-import fs from "fs";
-import path from "path";
 import CleanCSS from "clean-css";
-import process from "node:process";
+import fs from "fs";
 import http from "http";
+import process from "node:process";
+import path from "path";
+import postcss from "postcss";
+import type { Plugin } from "postcss";
+import puppeteer from "puppeteer";
 
 const flavors = Object.keys(catppuccin_flavors);
 const out_dir = path.join(process.cwd(), "dist", "css");
+const props = new Set([
+  "color",
+  "background-color",
+  "border-color",
+  "border-top-color",
+  "border-right-color",
+  "border-bottom-color",
+  "border-left-color",
+  "outline-color",
+  "caret-color",
+  "fill",
+  "stroke",
+  "text-shadow",
+  "box-shadow",
+]);
+
+const colorPlugin: Plugin = {
+  postcssPlugin: "extract-colors",
+  Once(root: postcss.Root) {
+    root.walkRules((rule: postcss.Rule) => {
+      const decls: postcss.Declaration[] = [];
+
+      rule.walkDecls((decl: postcss.Declaration) => {
+        const prop = decl.prop.toLowerCase();
+
+        if (props.has(prop)) {
+          decls.push(decl.clone());
+        } else if (
+          (prop === "background" || prop === "border" ||
+            prop === "outline") &&
+          /^(#|rgb|hsl)/.test(decl.value)
+        ) {
+          const cloned = decl.clone();
+          cloned.prop = prop === "background"
+            ? "background-color"
+            : `${prop}-color`;
+          decls.push(cloned);
+        }
+      });
+
+      if (decls.length === 0) {
+        rule.remove();
+      } else {
+        rule.removeAll();
+        decls.forEach((d) => rule.append(d));
+      }
+    });
+  },
+};
 
 if (!fs.existsSync(out_dir)) {
   fs.mkdirSync(out_dir, { recursive: true });
@@ -41,7 +92,17 @@ function startServer(port: number): Promise<http.Server> {
         site_path = path.join(process.cwd(), "demo", url);
       }
 
-      let content = fs.readFileSync(site_path, "utf-8");
+      let content: string;
+
+      try {
+        content = fs.readFileSync(site_path, "utf-8");
+      } catch (error) {
+        console.error(`file not found: ${site_path}`);
+        res.writeHead(404);
+        res.end("Not Found");
+        return;
+      }
+
       const ext = path.extname(site_path).toLowerCase();
 
       if (ext === ".html") {
@@ -71,7 +132,7 @@ function startServer(port: number): Promise<http.Server> {
 }
 
 async function fetch(flavor: string, port: number): Promise<string> {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   try {
@@ -102,85 +163,6 @@ async function fetch(flavor: string, port: number): Promise<string> {
   }
 }
 
-function colorMatch(css: string): string {
-  const props = new Set([
-    "color",
-    "background-color",
-    "border-color",
-    "border-top-color",
-    "border-right-color",
-    "border-bottom-color",
-    "border-left-color",
-    "outline-color",
-    "caret-color",
-    "fill",
-    "stroke",
-    "text-shadow",
-    "box-shadow",
-  ]);
-
-  const col_rule = /(#[0-9a-f]{3,8}|rgb[a]?\([^)]+\)|[a-z]+)/gi;
-
-  const rule_rule = /([^{]+)\{([^}]*)\}/g;
-  const out: string[] = [];
-  let match;
-
-  while ((match = rule_rule.exec(css)) !== null) {
-    const selector = match[1].trim();
-    const declarations = match[2];
-
-    const decls = declarations
-      .split(";")
-      .map((d) => d.trim())
-      .filter((d) => d.length > 0)
-      .map((d) => {
-        const [propName, ...valueParts] = d.split(":");
-        const prop = propName.trim().toLowerCase();
-        const value = valueParts.join(":").trim();
-
-        if (props.has(prop)) {
-          return d;
-        }
-
-        if (prop === "background" && col_rule.test(value)) {
-          const color = value.match(col_rule)
-            ?.[value.match(col_rule)!.length - 1];
-          return color ? `background-color:${color}` : null;
-        }
-
-        if (prop === "border" && col_rule.test(value)) {
-          const color = value.match(col_rule)
-            ?.[value.match(col_rule)!.length - 1];
-          return color ? `border-color:${color}` : null;
-        }
-
-        if (
-          prop.match(/^border-(top|right|bottom|left)$/) && col_rule.test(value)
-        ) {
-          const color = value.match(col_rule)
-            ?.[value.match(col_rule)!.length - 1];
-          const dir = prop.split("-")[1];
-          return color ? `border-${dir}-color:${color}` : null;
-        }
-
-        if (prop === "outline" && col_rule.test(value)) {
-          const color = value.match(col_rule)
-            ?.[value.match(col_rule)!.length - 1];
-          return color ? `outline-color:${color}` : null;
-        }
-
-        return null;
-      })
-      .filter((d) => d !== null);
-
-    if (decls.length > 0) {
-      out.push(`${selector}{${decls.join(";")}}`);
-    }
-  }
-
-  return out.join("");
-}
-
 async function main() {
   const minifier = new CleanCSS();
 
@@ -193,7 +175,7 @@ async function main() {
 
     if (css) {
       console.log(`2. matching only color rules...`);
-      css = colorMatch(css);
+      css = postcss([colorPlugin]).process(css, { from: undefined }).css;
       console.log(`3. minifying...`);
       css = minifier.minify(css).styles;
       const filename = path.join(out_dir, `catppuccin-${flavor}.css`);
