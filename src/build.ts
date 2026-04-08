@@ -1,23 +1,19 @@
-import { flavors } from "@catppuccin/palette";
-import { cyan, green, hex, magenta, red, white } from "ansis";
-import { StyleModule } from "style-mod";
+import {CatppuccinFlavor, CatppuccinFlavors, flavors,} from "@catppuccin/palette";
+import {cyan, green, hex, magenta, red, white} from "ansis";
+import type {StyleSpec} from "style-mod";
+import {StyleModule} from "style-mod";
 
 import CleanCSS from "clean-css";
 import fs from "fs";
 import process from "node:process";
 import path from "path";
+import type {Plugin} from "postcss";
 import postcss from "postcss";
 
-import type { Plugin } from "postcss";
-import type { StyleSpec } from "style-mod";
-
-import {
-  createCatppuccinHighlightStyle,
-  createCatppuccinThemeSpec,
-} from "./theme-spec";
+import {createCatppuccinHighlightStyle, createCatppuccinThemeSpec,} from "./theme-spec";
 
 const out_dir = path.join(process.cwd(), "dist", "css");
-const props: Set<string> = new Set([
+const props = new Set([
   "color",
   "background-color",
   "border-color",
@@ -33,26 +29,34 @@ const props: Set<string> = new Set([
   "box-shadow",
 ]);
 
-fs.mkdirSync(out_dir, { recursive: true });
+fs.mkdirSync(out_dir, {recursive: true});
 
-const createLogger = (palette?: typeof flavors.macchiato) => {
-  const logtype_enum: Record<string, (s: string) => string> = {
+type LoggerType = (
+  type: string,
+  context: string,
+  message: string,
+) => string;
+type LogType = "ERROR" | "SUCCESS" | "LOG" | "EXIT";
+
+const createLogger = (palette?: CatppuccinFlavor): LoggerType => {
+  const logtype_enum: Record<LogType, (s: string) => string> = {
     ERROR: palette?.colors.red.hex ? hex(palette.colors.red.hex) : red,
     SUCCESS: palette?.colors.green.hex ? hex(palette.colors.green.hex) : green,
     LOG: palette?.colors.teal.hex ? hex(palette.colors.teal.hex) : cyan,
     EXIT: palette?.colors.mauve.hex ? hex(palette.colors.mauve.hex) : magenta,
   };
 
-  return (type: string, context: string, message: string) => {
+  return (type: string, context: string, message: string): string => {
     const logtype_pad = type.padEnd(7);
     const context_pad = context.padEnd(11);
-    const colorize = logtype_enum[type] || white;
+    const colorize = logtype_enum[type as LogType] ||
+      white;
 
     return `[${colorize(logtype_pad)}] ${colorize(context_pad)} ${message}`;
   };
 };
 
-const termLogger: ReturnType<typeof createLogger> = createLogger();
+const termLogger = createLogger();
 
 const extractColorDeclarationsPlugin: Plugin = {
   postcssPlugin: "extract-colors",
@@ -70,7 +74,7 @@ const extractColorDeclarationsPlugin: Plugin = {
             prop === "outline") &&
           /^(#|rgba?|hsla?)/.test(decl.value)
         ) {
-          const cloned = decl.clone();
+          const cloned: postcss.Declaration = decl.clone();
           cloned.prop = prop === "background"
             ? "background-color"
             : `${prop}-color`;
@@ -94,7 +98,7 @@ function createThemeModule(spec: Record<string, StyleSpec>): StyleModule {
   return new StyleModule(spec, {
     finish(selector: string) {
       return /&/.test(selector)
-        ? selector.replace(/&\w*/, (matched: string) => {
+        ? selector.replace(/&\w*/, (matched) => {
           if (matched === "&") {
             return `.${prefix}`;
           }
@@ -107,21 +111,25 @@ function createThemeModule(spec: Record<string, StyleSpec>): StyleModule {
 }
 
 function processFlavorThread(
-  flavor: string,
+  flavor: keyof CatppuccinFlavors,
   minifier: InstanceType<typeof CleanCSS>,
 ): void {
-  const palette = flavors[flavor as keyof typeof flavors];
-  const flavorLogger: ReturnType<typeof createLogger> = createLogger(palette);
+  const palette = flavors[flavor];
+  const flavorLogger = createLogger(palette);
 
   try {
     console.log(
       flavorLogger("LOG", flavor, "1. generating theme + highlight styles..."),
     );
 
-    const themeSpec = createCatppuccinThemeSpec(palette);
+    const themeSpec = createCatppuccinThemeSpec(
+      palette,
+    );
     const themeCSS = createThemeModule(themeSpec).getRules();
 
-    const highlightStyle = createCatppuccinHighlightStyle(palette);
+    const highlightStyle = createCatppuccinHighlightStyle(
+      palette,
+    );
     const highlightCSS = highlightStyle.module?.getRules() ?? "";
 
     let css = [themeCSS, highlightCSS].filter(Boolean).join("\n\n");
@@ -157,7 +165,7 @@ function processFlavorThread(
 
 const minifier: InstanceType<typeof CleanCSS> = new CleanCSS();
 
-for (const flavor of Object.keys(flavors)) {
+for (const flavor of Object.keys(flavors) as Array<keyof CatppuccinFlavors>) {
   processFlavorThread(flavor, minifier);
 }
 

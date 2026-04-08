@@ -1,11 +1,13 @@
 // src/theme-spec.ts
-import { CatppuccinFlavor } from "@catppuccin/palette";
-import { HighlightStyle } from "@codemirror/language";
-import { tags as t } from "@lezer/highlight";
+import {CatppuccinFlavor} from "@catppuccin/palette";
+import {HighlightStyle} from "@codemirror/language";
+import {tags as t} from "@lezer/highlight";
+
+import type {StyleSpec} from "style-mod";
 
 export function createCatppuccinThemeSpec(
   flavor: CatppuccinFlavor,
-): Record<string, any> {
+): Record<string, StyleSpec> {
   const colors = flavor.colors;
 
   return {
@@ -31,8 +33,8 @@ export function createCatppuccinThemeSpec(
       backgroundColor: colors.mantle.hex,
       color: colors.text.hex,
     },
-    ".cm-panels.cm-panels-top": { borderBottom: "2px solid black" },
-    ".cm-panels.cm-panels-bottom": { borderTop: "2px solid black" },
+    ".cm-panels.cm-panels-top": {borderBottom: `2px solid ${colors.overlay0.hex}`},
+    ".cm-panels.cm-panels-bottom": {borderTop: `2px solid ${colors.overlay0.hex}`},
 
     ".cm-searchMatch": {
       backgroundColor: `${colors.blue.hex}59`,
@@ -42,7 +44,7 @@ export function createCatppuccinThemeSpec(
       backgroundColor: `${colors.blue.hex}2f`,
     },
 
-    ".cm-activeLine": { backgroundColor: colors.surface0.hex },
+    ".cm-activeLine": {backgroundColor: colors.surface0.hex},
     ".cm-selectionMatch": {
       backgroundColor: `${colors.surface2.hex}4d`,
     },
@@ -99,7 +101,7 @@ export function createCatppuccinHighlightStyle(
   const colors = flavor.colors;
 
   return HighlightStyle.define([
-    { tag: t.keyword, color: colors.mauve.hex },
+    {tag: t.keyword, color: colors.mauve.hex},
     {
       tag: [
         t.name,
@@ -123,32 +125,32 @@ export function createCatppuccinHighlightStyle(
       tag: [t.color, t.constant(t.name), t.standard(t.name)],
       color: colors.peach.hex,
     },
-    { tag: [t.self, t.atom], color: colors.red.hex },
+    {tag: [t.self, t.atom], color: colors.red.hex},
     {
       tag: [t.typeName, t.className, t.changed, t.annotation, t.namespace],
       color: colors.yellow.hex,
     },
-    { tag: [t.operator], color: colors.sky.hex },
-    { tag: [t.url, t.link], color: colors.teal.hex },
-    { tag: [t.escape, t.regexp], color: colors.pink.hex },
+    {tag: [t.operator], color: colors.sky.hex},
+    {tag: [t.url, t.link], color: colors.teal.hex},
+    {tag: [t.escape, t.regexp], color: colors.pink.hex},
     {
       tag: [t.meta, t.punctuation, t.separator, t.comment],
       color: colors.overlay2.hex,
     },
-    { tag: t.strong, fontWeight: "bold" },
-    { tag: t.emphasis, fontStyle: "italic" },
-    { tag: t.strikethrough, textDecoration: "line-through" },
-    { tag: t.link, color: colors.blue.hex, textDecoration: "underline" },
-    { tag: t.heading, fontWeight: "bold", color: colors.blue.hex },
+    {tag: t.strong, fontWeight: "bold"},
+    {tag: t.emphasis, fontStyle: "italic"},
+    {tag: t.strikethrough, textDecoration: "line-through"},
+    {tag: t.link, color: colors.blue.hex, textDecoration: "underline"},
+    {tag: t.heading, fontWeight: "bold", color: colors.blue.hex},
     {
       tag: [t.special(t.variableName)],
       color: colors.lavender.hex,
     },
-    { tag: [t.bool, t.number], color: colors.peach.hex },
+    {tag: [t.bool, t.number], color: colors.peach.hex},
     {
       tag: [t.processingInstruction, t.string, t.inserted],
       color: colors.green.hex,
     },
-    { tag: t.invalid, color: colors.red.hex },
+    {tag: t.invalid, color: colors.red.hex},
   ]);
 }
