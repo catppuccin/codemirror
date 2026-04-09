@@ -59,8 +59,11 @@ function createDeclExtractPlugin(
         rule.walkDecls( ( decl: postcss.Declaration ) => {
           const valueLower = decl.value.toLowerCase();
 
-          if ( paletteHexes.some( ( hex ) => valueLower.includes( hex ) ) ) {
-            decls.push( decl.clone() );
+          for ( const hex of paletteHexes ) {
+            if ( valueLower.includes( hex ) ) {
+              decls.push( decl.clone() );
+              break;
+            }
           }
         } );
 
