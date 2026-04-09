@@ -29,10 +29,11 @@
     "url": "https://catppuccin.com"
   },
   "scripts": {
-    "prepare": "pnpm run build; pnpm run build:css",
-    "build": "cm-buildhelper src/catppuccin.ts",
+    "prepare": "pnpm run build",
+    "build": "pnpm run build:js; pnpm run build:css",
+    "build:js": "cm-buildhelper src/catppuccin.ts",
     "build:css": "tsx src/css.ts",
-    "build:watch": "nodemon --watch src -e ts --exec 'pnpm prepare'"
+    "build:watch": "nodemon --watch src -e ts --exec 'pnpm run build'"
   },
   "files": [
     "dist"

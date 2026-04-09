@@ -21,7 +21,7 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm prepare
+      - run: pnpm build
       - run: cp dist/index.js demo
       - uses: actions/upload-pages-artifact@v4
         with:

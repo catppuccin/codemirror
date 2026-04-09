@@ -15,19 +15,12 @@ const VERBOSE = process.env.VERBOSE === "1";
 
 const log = ( level: string, flavor: string, message: string ) => {
   const output = `[${level.padEnd( 7 )}] ${flavor.padEnd( 11 )} ${message}`;
-
-  if ( level === "ERR" ) {
-    console.error( output );
-  } else if ( level === "LOG" || "ERROR" ) {
-    if ( VERBOSE ) console.log( output );
-  } else {console.log( output );}
+  if ( level != "LOG" || VERBOSE ) {
+    console.log( output );
+  }
 };
 
 fs.mkdirSync( out_dir, { recursive: true } );
-
-if ( Object.keys( flavors ).length === 0 ) {
-  log( "ERR", "Object.keys", "flavors not found." );
-}
 
 function createDeclExtractPlugin( flavor: CatppuccinFlavor ): Plugin {
   const paletteHexPattern = new RegExp(
@@ -82,7 +75,6 @@ function processFlavorThread(
 ): void {
   const palette = flavors[flavor];
 
-  try {
     log( "LOG", flavor, "1. generating theme + highlight styles..." );
     const themeSpec = createCatppuccinThemeSpec(
       palette
@@ -105,9 +97,6 @@ function processFlavorThread(
     fs.writeFileSync( filename, css, "utf-8" );
 
     log( "SUCCESS", flavor, "-  complete: ${filename}" );
-  } catch (error) {
-    log( "ERR", flavor, "-  ${error instanceof Error ? error.message : String( error )}" );
-  }
 }
 
 for ( const flavor of Object.keys( flavors ) as Array<keyof CatppuccinFlavors> ) {
