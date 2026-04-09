@@ -1,9 +1,7 @@
 import { CatppuccinFlavor, CatppuccinFlavors, flavors } from "@catppuccin/palette";
-import { cyan, green, hex, magenta, red, white } from "ansis";
 import type { StyleSpec } from "style-mod";
 import { StyleModule } from "style-mod";
 
-import CleanCSS from "clean-css";
 import fs from "fs";
 import process from "node:process";
 import path from "path";
@@ -13,41 +11,35 @@ import postcss from "postcss";
 import { createCatppuccinHighlightStyle, createCatppuccinThemeSpec } from "./theme-spec";
 
 const out_dir = path.join( process.cwd(), "dist", "css" );
+const VERBOSE = process.env.VERBOSE === "1";
 
-fs.mkdirSync( out_dir, { recursive: true } );
+const log = ( level: string, flavor: string, message: string ) => {
+  const output = `[${level.padEnd( 7 )}] ${flavor.padEnd( 11 )} ${message}`;
 
-type LoggerType = (
-  type: string,
-  context: string,
-  message: string
-) => string;
-type LogType = "ERROR" | "SUCCESS" | "LOG" | "EXIT";
-
-const createLogger = ( palette?: CatppuccinFlavor ): LoggerType => {
-  const logtype_enum: Record<LogType, ( s: string ) => string> = {
-    ERROR: palette?.colors.red.hex ? hex( palette.colors.red.hex ) : red,
-    SUCCESS: palette?.colors.green.hex ? hex( palette.colors.green.hex ) : green,
-    LOG: palette?.colors.teal.hex ? hex( palette.colors.teal.hex ) : cyan,
-    EXIT: palette?.colors.mauve.hex ? hex( palette.colors.mauve.hex ) : magenta
-  };
-
-  return ( type: string, context: string, message: string ): string => {
-    const logtype_pad = type.padEnd( 7 );
-    const context_pad = context.padEnd( 11 );
-    const colorize = logtype_enum[type as LogType] ||
-      white;
-
-    return `[${colorize( logtype_pad )}] ${colorize( context_pad )} ${message}`;
-  };
+  if ( level === "ERR" ) {
+    console.error( output );
+  } else if ( level === "LOG" || "ERROR" ) {
+    if ( VERBOSE ) console.log( output );
+  } else {console.log( output );}
 };
 
-const termLogger = createLogger();
+try {
+  fs.mkdirSync( out_dir, { recursive: true } );
+} catch (error) {
+  log( "ERR", "fs.mkdirSync", `Failed to create output directory: ${error}` );
+  process.exit( 1 );
+}
 
-function createDeclExtractPlugin(
-  flavor: CatppuccinFlavor
-): Plugin {
-  const paletteHexes = Object.values( flavor.colors ).map(
-    ( color ) => color.hex.toLowerCase()
+if ( Object.keys( flavors ).length === 0 ) {
+  log( "ERR", "Object.keys", "flavors not found." );
+}
+
+function createDeclExtractPlugin( flavor: CatppuccinFlavor ): Plugin {
+  const paletteHexPattern = new RegExp(
+    Object.values( flavor.colors )
+      .map( c => c.hex.toLowerCase() )
+      .join( "|" ),
+    "i"
   );
 
   return {
@@ -55,15 +47,9 @@ function createDeclExtractPlugin(
     Once( root: postcss.Root ) {
       root.walkRules( ( rule: postcss.Rule ) => {
         const decls: postcss.Declaration[] = [];
-
         rule.walkDecls( ( decl: postcss.Declaration ) => {
-          const valueLower = decl.value.toLowerCase();
-
-          for ( const hex of paletteHexes ) {
-            if ( valueLower.includes( hex ) ) {
-              decls.push( decl.clone() );
-              break;
-            }
+          if ( paletteHexPattern.test( decl.value ) ) {
+            decls.push( decl.clone() );
           }
         } );
 
@@ -97,17 +83,12 @@ function createThemeModule( spec: Record<string, StyleSpec> ): StyleModule {
 }
 
 function processFlavorThread(
-  flavor: keyof CatppuccinFlavors,
-  minifier: InstanceType<typeof CleanCSS>
+  flavor: keyof CatppuccinFlavors
 ): void {
   const palette = flavors[flavor];
-  const flavorLogger = createLogger( palette );
 
   try {
-    console.log(
-      flavorLogger( "LOG", flavor, "1. generating theme + highlight styles..." )
-    );
-
+    log( "LOG", flavor, "1. generating theme + highlight styles..." );
     const themeSpec = createCatppuccinThemeSpec(
       palette
     );
@@ -119,40 +100,24 @@ function processFlavorThread(
     const highlightCSS = highlightStyle.module?.getRules() ?? "";
 
     let css = [ themeCSS, highlightCSS ].filter( Boolean ).join( "\n\n" );
-    console.log(
-      flavorLogger( "LOG", flavor, `-  extracted ${css.length} chars.` )
-    );
 
-    console.log(
-      flavorLogger( "LOG", flavor, "2. matching only color rules..." )
-    );
+    log( "LOG", flavor, "2. matching only color rules..." );
     css = postcss( [ createDeclExtractPlugin( palette ) ] ).process( css, {
       from: undefined
     } ).css;
 
-    console.log( flavorLogger( "LOG", flavor, "3. minifying..." ) );
-    css = minifier.minify( css ).styles;
-
     const filename = path.join( out_dir, `catppuccin-${flavor}.css` );
-    console.log( flavorLogger( "LOG", flavor, `4. writing to ${filename}` ) );
+    log( "LOG", flavor, "4. writing ${css.length} chars to ${filename}" );
     fs.writeFileSync( filename, css, "utf-8" );
 
-    console.log( flavorLogger( "SUCCESS", flavor, `-  complete: ${filename}` ) );
+    log( "SUCCESS", flavor, "-  complete: ${filename}" );
   } catch (error) {
-    console.error(
-      flavorLogger(
-        "ERROR",
-        flavor,
-        `-  ${error instanceof Error ? error.message : String( error )}`
-      )
-    );
+    log( "ERR", flavor, "-  ${error instanceof Error ? error.message : String( error )}" );
   }
 }
 
-const minifier: InstanceType<typeof CleanCSS> = new CleanCSS();
-
 for ( const flavor of Object.keys( flavors ) as Array<keyof CatppuccinFlavors> ) {
-  processFlavorThread( flavor, minifier );
+  processFlavorThread( flavor );
 }
 
-console.log( termLogger( "EXIT", "build.ts", "-  success" ) );
+log( "EXIT", "build.ts".padEnd( 11 ), "-  success" );
