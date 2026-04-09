@@ -102,7 +102,6 @@ function processFlavorThread(
     } ).css;
 
     const filename = path.join( out_dir, `catppuccin-${flavor}.css` );
-    log( "LOG", flavor, "4. writing ${css.length} chars to ${filename}" );
     fs.writeFileSync( filename, css, "utf-8" );
 
     log( "SUCCESS", flavor, "-  complete: ${filename}" );
