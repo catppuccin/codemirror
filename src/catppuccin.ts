@@ -126,7 +126,7 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
       color: colors.yellow.hex,
     },
     { tag: [t.operator], color: colors.sky.hex },
-    { tag: [t.url, t.link], color: colors.teal.hex },
+    { tag: [t.url], color: colors.teal.hex },
     { tag: [t.escape, t.regexp], color: colors.pink.hex },
     {
       tag: [t.meta, t.punctuation, t.separator, t.comment],
