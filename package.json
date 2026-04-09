@@ -50,7 +50,8 @@
     "@codemirror/language": "^6.12.1",
     "@codemirror/state": "^6.5.4",
     "@codemirror/view": "^6.39.15",
-    "@lezer/highlight": "^1.2.3"
+    "@lezer/highlight": "^1.2.3",
+    "@tsconfig/node-lts": "^24.0.0"
   },
   "devDependencies": {
     "@codemirror/buildhelper": "^1.0.0",
