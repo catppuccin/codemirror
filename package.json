@@ -31,7 +31,7 @@
   "scripts": {
     "prepare": "pnpm run build; pnpm run build-css",
     "build": "cm-buildhelper src/catppuccin.ts",
-    "build-css": "tsx src/build.ts",
+    "build-css": "tsx src/css.ts",
     "watch": "nodemon --watch src -e ts --exec 'pnpm build'"
   },
   "files": [
