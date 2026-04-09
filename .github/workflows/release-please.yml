@@ -3,7 +3,7 @@ name: release-please
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [ main ]
 
 permissions:
   contents: write
