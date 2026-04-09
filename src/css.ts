@@ -23,12 +23,7 @@ const log = ( level: string, flavor: string, message: string ) => {
   } else {console.log( output );}
 };
 
-try {
-  fs.mkdirSync( out_dir, { recursive: true } );
-} catch (error) {
-  log( "ERR", "fs.mkdirSync", `Failed to create output directory: ${error}` );
-  process.exit( 1 );
-}
+fs.mkdirSync( out_dir, { recursive: true } );
 
 if ( Object.keys( flavors ).length === 0 ) {
   log( "ERR", "Object.keys", "flavors not found." );
