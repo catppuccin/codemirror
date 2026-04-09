@@ -33,7 +33,8 @@
     "build": "pnpm run build:js; pnpm run build:css",
     "build:js": "cm-buildhelper src/catppuccin.ts",
     "build:css": "tsx src/css.ts",
-    "build:watch": "nodemon --watch src -e ts --exec 'pnpm run build'"
+    "build:watch": "nodemon --watch src -e ts --exec 'pnpm run build'",
+    "format": "prettier --write ."
   },
   "files": [
     "dist"
@@ -75,8 +76,9 @@
     "codemirror": "^6.0.2",
     "nodemon": "^3.1.14",
     "postcss": "^8.5.9",
+    "prettier": "3.8.1",
     "style-mod": "^4.1.3",
     "tsx": "^4.21.0"
   },
-  "packageManager": "pnpm@10.30.1"
+  "packageManager": "pnpm@10.33.0"
 }
