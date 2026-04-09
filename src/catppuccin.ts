@@ -6,7 +6,7 @@ import { CatppuccinFlavor, flavors } from "@catppuccin/palette";
 import {
   createCatppuccinHighlightStyle,
   createCatppuccinThemeSpec,
-} from "./theme-spec";
+} from "./theme-spec.js";
 
 function createCatppuccinTheme(flavor: CatppuccinFlavor): Extension {
   const theme: Extension = EditorView.theme(createCatppuccinThemeSpec(flavor), {

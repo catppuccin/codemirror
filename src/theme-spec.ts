@@ -1,4 +1,3 @@
-// src/theme-spec.ts
 import { CatppuccinFlavor } from "@catppuccin/palette";
 import { HighlightStyle } from "@codemirror/language";
 import { tags as t } from "@lezer/highlight";

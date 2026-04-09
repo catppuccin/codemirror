@@ -30,8 +30,9 @@
   },
   "scripts": {
     "prepare": "pnpm run build",
-    "build": "pnpm run build:js; pnpm run build:css",
-    "build:js": "cm-buildhelper src/catppuccin.ts",
+    "build": "pnpm run build:theme; pnpm run build:ctp; pnpm run build:css",
+    "build:theme": "tsc src/theme-spec.ts",
+    "build:ctp": "cm-buildhelper src/catppuccin.ts",
     "build:css": "tsx src/css.ts",
     "build:watch": "nodemon --watch src -e ts --exec 'pnpm run build'",
     "format": "prettier --write ."
