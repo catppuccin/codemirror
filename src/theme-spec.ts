@@ -33,12 +33,8 @@ export function createCatppuccinThemeSpec(
       backgroundColor: colors.mantle.hex,
       color: colors.text.hex
     },
-    ".cm-panels.cm-panels-top": {
-      borderBottom: `2px solid ${colors.overlay0.hex}`
-    },
-    ".cm-panels.cm-panels-bottom": {
-      borderTop: `2px solid ${colors.overlay0.hex}`
-    },
+    ".cm-panels.cm-panels-top": { borderBottom: "2px solid black" },
+    ".cm-panels.cm-panels-bottom": { borderTop: "2px solid black" },
 
     ".cm-searchMatch": {
       backgroundColor: `${colors.blue.hex}59`,
