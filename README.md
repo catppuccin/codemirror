@@ -79,6 +79,7 @@ This repository currently has no maintainers.
 - [marijnh](https://github.com/marijnh) for [CodeMirror](https://github.com/codemirror/codemirror5)
 - [ghostx31](https://github.com/ghostx31/) for [catppuccin/joplin](https://github.com/catppuccin/joplin)
 - [BuonOmo](https://github.com/BuonOmo) for CodeMirror v6 support
+- [Toria](https://github.com/ninetailedtori)
 
 &nbsp;
 
