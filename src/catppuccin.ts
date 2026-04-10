@@ -25,7 +25,7 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
 
       "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
         {
-          backgroundColor: `${colors.overlay2.hex}40`
+          backgroundColor: `${colors.overlay2.hex}40`,
         },
 
       ".cm-panels": {
@@ -33,10 +33,10 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
         color: colors.text.hex,
       },
       ".cm-panels.cm-panels-top": {
-        borderBottom: `2px solid ${colors.overlay0.hex}`
+        borderBottom: `1px solid ${colors.overlay0.hex}`,
       },
       ".cm-panels.cm-panels-bottom": {
-        borderTop: `2px solid ${colors.overlay0.hex}`
+        borderTop: `1px solid ${colors.overlay0.hex}`,
       },
 
       ".cm-searchMatch": {
