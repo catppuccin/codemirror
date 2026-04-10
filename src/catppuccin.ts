@@ -68,6 +68,10 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
         border: `1px solid ${colors.overlay0.hex}`,
       },
 
+      ".cm-button:active": {
+        backgroundImage: `linear-gradient(${colors.surface0.hex}, ${colors.surface1.hex})`,
+      },
+
       ".cm-activeLineGutter": {
         backgroundColor: colors.surface0.hex,
       },
