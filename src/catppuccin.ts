@@ -96,19 +96,13 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
         },
       },
     },
-    { dark: isDark }
+    { dark: isDark },
   );
 
   const highlightStyle = HighlightStyle.define([
     { tag: t.keyword, color: colors.mauve.hex },
     {
-      tag: [
-        t.name,
-        t.definition(t.name),
-        t.deleted,
-        t.character,
-        t.macroName,
-      ],
+      tag: [t.name, t.definition(t.name), t.deleted, t.character, t.macroName],
       color: colors.text.hex,
     },
     {
@@ -130,7 +124,7 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
       color: colors.yellow.hex,
     },
     { tag: [t.operator], color: colors.sky.hex },
-    { tag: [t.url, t.link], color: colors.teal.hex },
+    { tag: [t.url], color: colors.teal.hex },
     { tag: [t.escape, t.regexp], color: colors.pink.hex },
     {
       tag: [t.meta, t.punctuation, t.separator, t.comment],
@@ -159,9 +153,9 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
 // Create extensions for all variants
 export const catppuccinLatte: Extension = createCatppuccinTheme(flavors.latte);
 export const catppuccinFrappe: Extension = createCatppuccinTheme(
-  flavors.frappe
+  flavors.frappe,
 );
 export const catppuccinMacchiato: Extension = createCatppuccinTheme(
-  flavors.macchiato
+  flavors.macchiato,
 );
 export const catppuccinMocha: Extension = createCatppuccinTheme(flavors.mocha);
