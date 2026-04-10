@@ -32,8 +32,12 @@ export function createCatppuccinThemeSpec(
       backgroundColor: colors.mantle.hex,
       color: colors.text.hex,
     },
-    ".cm-panels.cm-panels-top": { borderBottom: "2px solid black" },
-    ".cm-panels.cm-panels-bottom": { borderTop: "2px solid black" },
+    ".cm-panels.cm-panels-top": {
+      borderBottom: `1px solid ${colors.overlay0.hex}`,
+    },
+    ".cm-panels.cm-panels-bottom": {
+      borderTop: `1px solid ${colors.overlay0.hex}`,
+    },
 
     ".cm-searchMatch": {
       backgroundColor: `${colors.blue.hex}59`,
@@ -124,7 +128,7 @@ export function createCatppuccinHighlightStyle(
       color: colors.yellow.hex,
     },
     { tag: [t.operator], color: colors.sky.hex },
-    { tag: [t.url, t.link], color: colors.teal.hex },
+    { tag: [t.url], color: colors.teal.hex },
     { tag: [t.escape, t.regexp], color: colors.pink.hex },
     {
       tag: [t.meta, t.punctuation, t.separator, t.comment],
