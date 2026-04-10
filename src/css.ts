@@ -15,7 +15,7 @@ import postcss from "postcss";
 import {
   createCatppuccinHighlightStyle,
   createCatppuccinThemeSpec,
-} from "./theme-spec.js";
+} from "@catppuccin/codemirror/theme-spec";
 
 const out_dir = path.join(process.cwd(), "dist", "css");
 const VERBOSE = process.env.VERBOSE === "1";

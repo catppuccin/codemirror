@@ -31,7 +31,7 @@
   "scripts": {
     "prepare": "pnpm run build",
     "build": "pnpm run build:theme; pnpm run build:ctp; pnpm run build:css",
-    "build:theme": "tsc src/theme-spec.ts",
+    "build:theme": "esbuild src/theme-spec.ts --bundle --outdir=dist --format=esm --platform=node",
     "build:ctp": "cm-buildhelper src/catppuccin.ts",
     "build:css": "tsx src/css.ts",
     "build:watch": "nodemon --watch src -e ts --exec 'pnpm run build'",
@@ -42,8 +42,12 @@
   ],
   "main": "dist/index.cjs",
   "exports": {
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./css": "./dist/css/catppuccin-*.css",
+    "./theme-spec": "./dist/theme-spec.js"
   },
   "types": "dist/index.d.ts",
   "module": "dist/index.js",
@@ -75,6 +79,7 @@
     "@types/clean-css": "^4.2.11",
     "@types/node": "^25.5.2",
     "codemirror": "^6.0.2",
+    "esbuild": "^0.28.0",
     "nodemon": "^3.1.14",
     "postcss": "^8.5.9",
     "prettier": "3.8.1",
