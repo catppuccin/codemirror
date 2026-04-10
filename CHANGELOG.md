@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.4](https://github.com/catppuccin/codemirror/compare/v1.0.3...v1.0.4) (2026-04-10)
+
+
+### Bug Fixes
+
+* **catppuccin.ts:** borders from black -&gt; overlay0 ([#38](https://github.com/catppuccin/codemirror/issues/38)) ([96a620d](https://github.com/catppuccin/codemirror/commit/96a620d108e2de5dda4f3ada3d2b6488b92d73cb))
+* **catppuccin.ts:** remove duped t.link. ([#37](https://github.com/catppuccin/codemirror/issues/37)) ([9b495f7](https://github.com/catppuccin/codemirror/commit/9b495f7c8d41b2bce4daaa812230ab5f3b53c018))
+
 ## [1.0.3](https://github.com/catppuccin/codemirror/compare/v1.0.2...v1.0.3) (2026-02-21)
 
 
