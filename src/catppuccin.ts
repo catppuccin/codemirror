@@ -25,7 +25,7 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
 
       "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
         {
-          backgroundColor: `${colors.overlay2.hex}40`
+          backgroundColor: `${colors.overlay2.hex}40`,
         },
 
       ".cm-panels": {
@@ -57,6 +57,19 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
         backgroundColor: colors.base.hex,
         color: colors.subtext0.hex,
         border: "none",
+      },
+
+      ".cm-textfield": {
+        border: `1px solid ${colors.overlay0.hex}`,
+      },
+
+      ".cm-button": {
+        backgroundImage: `linear-gradient(${colors.surface1.hex}, ${colors.surface0.hex})`,
+        border: `1px solid ${colors.overlay0.hex}`,
+      },
+
+      ".cm-button:active": {
+        backgroundImage: `linear-gradient(${colors.surface0.hex}, ${colors.surface1.hex})`,
       },
 
       ".cm-activeLineGutter": {
