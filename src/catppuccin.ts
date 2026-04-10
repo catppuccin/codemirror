@@ -25,15 +25,19 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
 
       "&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
         {
-          backgroundColor: `${colors.overlay2.hex}40`
+          backgroundColor: `${colors.overlay2.hex}40`,
         },
 
       ".cm-panels": {
         backgroundColor: colors.mantle.hex,
         color: colors.text.hex,
       },
-      ".cm-panels.cm-panels-top": { borderBottom: "2px solid black" },
-      ".cm-panels.cm-panels-bottom": { borderTop: "2px solid black" },
+      ".cm-panels.cm-panels-top": {
+        borderBottom: `1px solid ${colors.overlay0.hex}`,
+      },
+      ".cm-panels.cm-panels-bottom": {
+        borderTop: `1px solid ${colors.overlay0.hex}`,
+      },
 
       ".cm-searchMatch": {
         backgroundColor: `${colors.blue.hex}59`,
