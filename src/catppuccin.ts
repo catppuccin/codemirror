@@ -47,7 +47,10 @@ function createCatppuccinTheme(flavor: CatppuccinFlavor) {
         backgroundColor: `${colors.blue.hex}2f`,
       },
 
-      ".cm-activeLine": { backgroundColor: colors.surface0.hex },
+      // drawSelection() paints the selection on a layer behind the text, so
+      // the active-line background must be translucent to keep the selection
+      // visible on that line.
+      ".cm-activeLine": { backgroundColor: `${colors.surface0.hex}66` },
       ".cm-selectionMatch": {
         backgroundColor: `${colors.surface2.hex}4d`,
       },
